@@ -1,12 +1,24 @@
 var path = require('path');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   context: path.resolve('js'),
-  entry: ["./app"],
+
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
+    './app'
+  ],
+
   output: {
     path: path.resolve('build/js/'),
     publicPath: '/public/assets/js/',
     filename: "bundle.js"
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.css']
   },
 
   devServer: {
@@ -25,17 +37,20 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          cacheDirectory: true,
-          presets: ['react', 'es2015']
-        }
+        loaders: ['react-hot', 'babel-loader']
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: "style-loader!css-loader!postcss-loader"
       }
     ]
   },
-  resolve: {
-    extensions: ['', '.js']
+
+  postcss: function () {
+    return [precss, autoprefixer];
   },
+
   watch: true,
   eslint: {
     configFile: './.eslintrc'
