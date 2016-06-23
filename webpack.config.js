@@ -1,22 +1,23 @@
 var path = require('path');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
+var webpack = require('webpack');
 
 module.exports = {
   context: path.resolve('js'),
-
+  devtool: 'cheap-module-source-map',
   entry: {
-    hotReload: [
+    main: [
+      'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server'
-    ],
-    home: './home'
-
+      'webpack/hot/only-dev-server',
+      './render'
+    ]
   },
 
   output: {
     path: path.resolve('build/js/'),
-    publicPath: 'http://localhost:8080/public/assets/js/',
+    publicPath: '/public/assets/js/',
     filename: "[name].bundle.js"
   },
 
@@ -33,7 +34,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
+        loader: 'eslint'
       }
     ],
     loaders: [
@@ -41,18 +42,19 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [
-          'react-hot',
-          'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'
+          'babel'
         ]
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: "style-loader!css-loader!postcss-loader"
+        loader: "style!css!postcss"
       }
     ]
   },
-
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   postcss: function () {
     return [precss, autoprefixer];
   },
