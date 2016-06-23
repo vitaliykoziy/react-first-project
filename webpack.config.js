@@ -52,9 +52,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   postcss: function () {
     return [precss, autoprefixer];
   },
