@@ -5,16 +5,19 @@ var autoprefixer = require('autoprefixer');
 module.exports = {
   context: path.resolve('js'),
 
-  entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080',
-    'webpack/hot/only-dev-server',
-    './app'
-  ],
+  entry: {
+    hotReload: [
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server'
+    ],
+    home: './home'
+
+  },
 
   output: {
     path: path.resolve('build/js/'),
-    publicPath: '/public/assets/js/',
-    filename: "bundle.js"
+    publicPath: 'http://localhost:8080/public/assets/js/',
+    filename: "[name].bundle.js"
   },
 
   resolve: {
@@ -37,7 +40,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel-loader']
+        loaders: [
+          'react-hot',
+          'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'
+        ]
       },
       {
         test: /\.css$/,
