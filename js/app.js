@@ -1,6 +1,6 @@
 import React from 'react';
-import '../css/test.css';
+import styles from '../css/app.css';
 
 export const App = () => (
-  <h1>Hello!</h1>
+  <h1 className={ styles.test }>Hello!</h1>
 );

@@ -57,7 +57,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   postcss: function () {
-    return [precss, autoprefixer];
+    return {
+      plugins: [autoprefixer, precss]
+    };
   },
 
   watch: true,
