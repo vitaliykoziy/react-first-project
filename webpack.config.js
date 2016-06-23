@@ -2,6 +2,8 @@ var path = require('path');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
+var postcss = require('postcss');
+require('es6-promise').polyfill();
 
 module.exports = {
   context: path.resolve('js'),
@@ -49,7 +51,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loaders: ['style', 'css', 'postcss']
+        loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss']
       }
     ]
   },

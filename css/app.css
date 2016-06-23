@@ -1,4 +1,6 @@
-.test {
-    background-color: red;
-    font-size: 95px;
+:local {
+    .test {
+        background-color: red;
+        font-size: 95px;
+    }
 }
