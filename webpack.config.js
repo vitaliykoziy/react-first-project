@@ -6,6 +6,7 @@ var webpack = require('webpack');
 module.exports = {
   context: path.resolve('js'),
   devtool: 'cheap-module-source-map',
+
   entry: {
     main: [
       'react-hot-loader/patch',
@@ -26,7 +27,9 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: 'public'
+    contentBase: 'public',
+    hot: true,
+    inline: true
   },
 
   module: {
@@ -41,17 +44,18 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [
-          'babel'
-        ]
+        loaders: ['babel']
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: "style!css!postcss"
+        loaders: ['style', 'css', 'postcss']
       }
     ]
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   postcss: function () {
     return [precss, autoprefixer];
   },
