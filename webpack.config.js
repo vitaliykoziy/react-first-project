@@ -2,10 +2,13 @@ var path = require('path');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
+var postcss = require('postcss');
+require('es6-promise').polyfill();
 
 module.exports = {
   context: path.resolve('js'),
   devtool: 'cheap-module-source-map',
+
   entry: {
     main: [
       'react-hot-loader/patch',
@@ -26,7 +29,9 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: 'public'
+    contentBase: 'public',
+    hot: true,
+    inline: true
   },
 
   module: {
@@ -41,19 +46,22 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [
-          'babel'
-        ]
+        loaders: ['babel']
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: "style!css!postcss"
+        loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss']
       }
     ]
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   postcss: function () {
-    return [precss, autoprefixer];
+    return {
+      plugins: [autoprefixer, precss]
+    };
   },
 
   watch: true,
