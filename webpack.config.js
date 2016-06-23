@@ -1,20 +1,24 @@
 var path = require('path');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
+var webpack = require('webpack');
 
 module.exports = {
   context: path.resolve('js'),
-
-  entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080',
-    'webpack/hot/only-dev-server',
-    './app'
-  ],
+  devtool: 'cheap-module-source-map',
+  entry: {
+    main: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+      './render'
+    ]
+  },
 
   output: {
     path: path.resolve('build/js/'),
     publicPath: '/public/assets/js/',
-    filename: "bundle.js"
+    filename: "[name].bundle.js"
   },
 
   resolve: {
@@ -30,23 +34,24 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
+        loader: 'eslint'
       }
     ],
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel-loader']
+        loaders: [
+          'babel'
+        ]
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: "style-loader!css-loader!postcss-loader"
+        loader: "style!css!postcss"
       }
     ]
   },
-
   postcss: function () {
     return [precss, autoprefixer];
   },
