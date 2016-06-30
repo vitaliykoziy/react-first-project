@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../css/app.css';
+import styles from '../../../static/css/app.css';
 
 export const PopularCategoryView = () => (
   <div className={styles.category}>

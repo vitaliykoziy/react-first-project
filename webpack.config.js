@@ -6,7 +6,7 @@ var postcss = require('postcss');
 require('es6-promise').polyfill();
 
 module.exports = {
-  context: path.resolve('js'),
+  context: path.resolve('src/components'),
   devtool: 'cheap-module-source-map',
 
   entry: {

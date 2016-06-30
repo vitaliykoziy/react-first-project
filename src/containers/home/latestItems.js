@@ -1,7 +1,7 @@
 import React from 'react';
 import { SeparateLine } from '../separateLine';
 import { LatestView } from './latestView';
-import styles from '../../../css/app.css';
+import styles from '../../../static/css/app.css';
 
 
 export const LatestItems = () => (

@@ -236,6 +236,11 @@
             }
         }
     }
+    .counter{
+        @mixin contentPostion;
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media (max-width:730px) {
