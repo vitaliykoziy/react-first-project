@@ -25,7 +25,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.css']
+    extensions: ['', '.js', '.css', '.png', 'jpg']
   },
 
   devServer: {
@@ -52,15 +52,28 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
         loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss']
+      },
+      {
+        test: /\.(png|jpg)$/,
+        exclude: /node_modules/,
+        loader: 'url'
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file"
       }
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
   postcss: function () {
     return {
-      plugins: [autoprefixer, precss]
+      plugins: [autoprefixer, precss],
     };
   },
 

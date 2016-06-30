@@ -1,5 +1,3 @@
-/* eslint global-require: 0 */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './app';
@@ -12,14 +10,3 @@ if (module.hot) {
 }
 
 ReactDOM.render(<App />, rootEl);
-
-/*
- if (module.hot) {
- // Whenever a new version of app.js is available
- module.hot.accept('./app', () => {
- // Require the new version and render it instead
- const NextApp = require('./app');
- ReactDOM.render(<NextApp />, rootEl);
- });
- }
- */

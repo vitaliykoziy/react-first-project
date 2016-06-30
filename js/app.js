@@ -1,7 +1,13 @@
 import React from 'react';
-import styles from '../css/app.css';
+import { Header } from './header';
+import { Content } from './content';
+import { Footer } from './footer';
 
 
 export const App = () => (
-  <h1 className={styles.test}>Hello!</h1>
+  <div>
+    <Header />
+    <Content />
+    <Footer />
+  </div>
 );
