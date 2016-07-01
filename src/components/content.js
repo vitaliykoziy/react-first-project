@@ -1,6 +1,9 @@
 import React from 'react';
-import { Home } from './home';
+import Home from './home';
+import { connect } from 'react-redux';
 
-export const Content = () => (
+let Content = () => (
   <Home />
 );
+Content = connect()(Content);
+export default Content;

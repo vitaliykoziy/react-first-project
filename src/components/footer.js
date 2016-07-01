@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from '../../static/css/app.css';
+import { connect } from 'react-redux';
 
-export const Footer = () => (
+let Footer = () => (
   <footer className={styles.footer}>
     <div className={styles.footerContent}>
       <p>
@@ -10,3 +11,5 @@ export const Footer = () => (
     </div>
   </footer>
 );
+Footer = connect()(Footer);
+export default Footer;
