@@ -40,6 +40,7 @@
     "font-awesome-webpack": "0.0.4",
     "less": "^2.7.1",
     "node-libs-browser": "~1.0.0",
+    "postcss": "^5.0.21",
     "postcss-loader": "^0.9.1",
     "postcss-modules": "~0.5.0",
     "precss": "~1.4.0",

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Image } from '../utils/image';
 import styles from '../../static/css/app.css';
-import { connect } from 'react-redux';
 
-let Header = () => (
+export const Header = () => (
   <header className={styles.headerContent}>
     <nav className={styles.navigationContent}>
       <div>
@@ -22,5 +21,3 @@ let Header = () => (
     </nav>
   </header>
 );
-Header = connect()(Header);
-export default Header;

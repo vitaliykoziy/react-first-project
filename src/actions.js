@@ -1,17 +1,12 @@
 const constants = require('./constants');
 
 module.exports = {
-  increment: () => {
-    return (dispatch) => {
-      return dispatch({
-        type: constants.DECREMENT,
-      });
-    };
-  }
+  increment: dispatch => dispatch({ type: constants.INCREMENT }),
   // decrement: {type: constants.DECREMENT},
 };
 
-// export function increment() {
+
+// export function increment () {
 //   return (dispatch) => {
 //     return dispatch({
 //       type: constants.DECREMENT,
