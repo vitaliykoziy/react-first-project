@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { App } from './app';
-
-let store = require('./store');
+import store from './store';
 // Render the root component normally
 const rootEl = document.getElementById('root');
 if (module.hot) {

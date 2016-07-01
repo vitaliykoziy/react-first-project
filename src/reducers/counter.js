@@ -1,12 +1,12 @@
 import * as C from '../constants';
-const initialState = require('../initialstate');
+import initialState from '../initialstate';
 
-module.exports = function CounterReducer(state = initialState, action) {
+export const CounterReducer = (state = initialState, action) => {
   switch (action.type) {
     case C.INCREMENT:
-      return Object.assign({}, state, { counter: state.counter + 1 });
+      return state + 1;
     case C.DECREMENT:
-      return Object.assign({}, state, { counter: state.counter - 1 });
+      return state - 1;
     default:
       return initialState;
   }

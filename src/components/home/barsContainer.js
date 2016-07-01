@@ -3,7 +3,7 @@ import { LatestItems } from './latestItems';
 import { FeaturedItems } from './featuredItems';
 import { PopularCategories } from './popularCategories';
 import styles from '../../../static/css/app.css';
-require('font-awesome-webpack');
+import 'font-awesome-webpack';
 
 export const BarsContainer = () => (
   <div className={styles.barsWraper}>
