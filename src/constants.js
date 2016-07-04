@@ -1,5 +1,0 @@
-module.exports = {
-  // ACTION TYPES
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-};

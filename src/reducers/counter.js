@@ -1,11 +1,14 @@
-import * as C from '../constants';
+import {
+  INCREMENT,
+  DECREMENT,
+} from '../actionTypes';
 import initialState from '../initialstate';
 
 export const CounterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case C.INCREMENT:
+    case INCREMENT:
       return state + 1;
-    case C.DECREMENT:
+    case DECREMENT:
       return state - 1;
     default:
       return initialState;

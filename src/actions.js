@@ -1,4 +1,4 @@
-import constants from './constants';
+import constants from './actionTypes';
 
-export const increment = () => ({ type: constants.INCREMENT });
-export const decrement = () => ({ type: constants.DECREMENT });
+export const incrementAction = () => ({ type: constants.INCREMENT });
+export const decrementAction = () => ({ type: constants.DECREMENT });

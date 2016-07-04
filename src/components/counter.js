@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
 import styles from '../../static/css/app.css';
 import { connect } from 'react-redux';
-import { increment as incrementAction, decrement as decrementAction } from '../actions';
+import {
+  incrementAction,
+  decrementAction,
+} from '../actions';
 
 const Counter = (props) => (
   <div className={styles.counter}>
@@ -19,8 +22,12 @@ Counter.propTypes = {
 const mapStateToProps = (state) => ({ counter: state.counter });
 
 const mapDispatchToProps = (dispatch) => ({
-  doIncrement: () => { dispatch(incrementAction()); },
-  doDecrement: () => { dispatch(decrementAction()); },
+  doIncrement: () => {
+    dispatch(incrementAction());
+  },
+  doDecrement: () => {
+    dispatch(decrementAction());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
