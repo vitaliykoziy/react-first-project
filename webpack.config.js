@@ -25,9 +25,9 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.css', '.png', 'jpg']
+    extensions: ['', '.js', '.css', '.png', '.jpg', '.json']
   },
-
+  
   devServer: {
     contentBase: 'public',
     hot: true,
@@ -60,11 +60,15 @@ module.exports = {
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file"
+        loader: 'file'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },

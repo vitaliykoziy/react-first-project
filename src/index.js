@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import Helmet from 'react-helmet';
 import { App } from './app';
 import store from './store';
 import DevTools from './containers/DevTools';
@@ -12,6 +13,10 @@ if (module.hot) {
 ReactDOM.render(
   <Provider store={store}>
     <div>
+      <Helmet
+        title="My Business"
+        titleTemplate="My Business - %s"
+      />
       <App />
       <DevTools />
     </div>
