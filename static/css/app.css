@@ -241,6 +241,10 @@
         display: flex;
         justify-content: center;
     }
+    .mrl10{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 
 @media (max-width:730px) {
