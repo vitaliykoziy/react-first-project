@@ -1,7 +1,7 @@
 import React from 'react';
 import { SeparateLine } from '../separateLine';
 import { FeaturedView } from './featuredView';
-import styles from '../../../css/app.css';
+import styles from '../../../static/css/app.css';
 
 
 export const FeaturedItems = () => (

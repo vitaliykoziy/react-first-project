@@ -6,7 +6,11 @@ import React, { Component, PropTypes } from 'react';
 export class Image extends Component {
 
   getSrc() {
-    return require('../../images/' + this.props.src);
+    try {
+      return require('../../static/images/' + this.props.src);
+    } catch (exc) {
+      return '';
+    }
   }
 
   render() {

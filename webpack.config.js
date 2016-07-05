@@ -6,7 +6,7 @@ var postcss = require('postcss');
 require('es6-promise').polyfill();
 
 module.exports = {
-  context: path.resolve('js'),
+  context: path.resolve('src'),
   devtool: 'cheap-module-source-map',
 
   entry: {
@@ -14,7 +14,7 @@ module.exports = {
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
-      './render'
+      './index'
     ]
   },
 
