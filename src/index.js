@@ -11,8 +11,10 @@ if (module.hot) {
 }
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-    <DevTools />
+    <div>
+      <App />
+      <DevTools />
+    </div>
   </Provider>,
   rootEl
 );
