@@ -10,6 +10,7 @@ import createLogger from 'redux-logger';
 import DevTools from '../containers/DevTools';
 // import reducers
 import { CounterReducer } from './reducers/counter';
+import { fetchSeoDataReducer } from './reducers/seo';
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -26,6 +27,7 @@ const enhancer = compose(
 
 const rootReducer = combineReducers({
   counter: CounterReducer,
+  seo: fetchSeoDataReducer,
 });
 
 export default createStore(rootReducer, enhancer);
