@@ -2,12 +2,7 @@ import React, { PropTypes } from 'react';
 import styles from '../../static/css/app.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-  incrementAction,
-  decrementAction,
-  increment10Action,
-  decrement10Action,
-} from '../actions';
+import { counterActions } from '../redux/actions/index';
 
 const Counter = (props) => (
   <div className={styles.counter}>
@@ -30,9 +25,6 @@ export default connect(
   state => ({ counter: state.counter }),
   dispatch => bindActionCreators(
     {
-      incrementAction,
-      decrementAction,
-      increment10Action,
-      decrement10Action,
+      ...counterActions,
     }, dispatch)
 )(Counter);

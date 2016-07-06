@@ -3,10 +3,8 @@ import Helmet from 'react-helmet';
 import { FullWidthAdvertising } from './fullWidthAdvertising';
 import { MayLike } from './home/mayLike';
 import { BarsContainer } from './home/barsContainer';
-import { parseSeo } from '../utils/parseSeo';
 import styles from '../../static/css/app.css';
 
-parseSeo();
 export const Home = () => (
   <div className={styles.homeContent}>
     <Helmet

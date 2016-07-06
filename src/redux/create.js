@@ -3,12 +3,13 @@
  */
 
 import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
-import { CounterReducer } from './reducers/counter';
 import { persistState } from 'redux-devtools';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import DevTools from './containers/DevTools';
+import DevTools from '../containers/DevTools';
+// import reducers
+import { CounterReducer } from './reducers/counter';
 
 function getDebugSessionKey() {
   // You can write custom logic here!

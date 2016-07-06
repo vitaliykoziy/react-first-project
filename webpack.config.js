@@ -4,6 +4,7 @@ var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var postcss = require('postcss');
 require('es6-promise').polyfill();
+var port = '8080';
 
 module.exports = {
   context: path.resolve('src'),
@@ -12,7 +13,7 @@ module.exports = {
   entry: {
     main: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:8080',
+      'webpack-dev-server/client?http://localhost:'+port,
       'webpack/hot/only-dev-server',
       './index'
     ]
@@ -20,18 +21,19 @@ module.exports = {
 
   output: {
     path: path.resolve('build/js/'),
-    publicPath: '/public/assets/js/',
+    publicPath: '/public/assets/',
     filename: "[name].bundle.js"
   },
 
   resolve: {
     extensions: ['', '.js', '.css', '.png', '.jpg', '.json']
   },
-  
+
   devServer: {
     contentBase: 'public',
     hot: true,
-    inline: true
+    inline: true,
+    port: port
   },
 
   module: {
@@ -56,7 +58,7 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         exclude: /node_modules/,
-        loader: 'url'
+        loader: 'url?limit=50000'
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
