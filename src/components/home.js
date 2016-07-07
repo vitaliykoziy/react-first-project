@@ -1,14 +1,18 @@
+//  import modules
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+//  import components
 import { FullWidthAdvertising } from './fullWidthAdvertising';
 import { MayLike } from './home/mayLike';
 import { BarsContainer } from './home/barsContainer';
+//  import actions
 import { seoActions } from '../redux/actions/index';
+//  import styles
 import styles from '../../static/css/app.css';
 
-const fetchSeoData = (props) => (props.fetchSeoDataAction);
+const fetchSeoData = props => props.fetchSeoDataAction();
 
 class Home extends Component {
   constructor(props) {
@@ -34,7 +38,9 @@ class Home extends Component {
             ]
           }
         />
-        <button onClick={fetchSeoData(this.props)} className={styles.mrl10}>TESTSTSTS</button>
+        <button onClick={() => (fetchSeoData(this.props))} className={styles.mrl10}>
+          TESTSTSTS
+        </button>
         <FullWidthAdvertising />
         <BarsContainer />
         <MayLike />

@@ -2,13 +2,17 @@
  This file defines the main Redux Store. It will be required by all "smart" components in the app
  */
 
+//  import modules
 import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+//  import client middleware
+import callApi from './middleware/clientMiddleware';
+//  import containers
 import DevTools from '../containers/DevTools';
-// import reducers
+//  import reducers
 import { CounterReducer } from './reducers/counter';
 import { fetchSeoDataReducer } from './reducers/seo';
 
@@ -20,7 +24,7 @@ function getDebugSessionKey() {
 }
 const logger = createLogger();
 const enhancer = compose(
-  applyMiddleware(thunk, promise, logger),
+  applyMiddleware(thunk, callApi, promise, logger),
   DevTools.instrument(),
   persistState(getDebugSessionKey())
 );

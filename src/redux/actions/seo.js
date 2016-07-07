@@ -1,11 +1,13 @@
-import fetch from 'isomorphic-fetch';
 import {
-  RECEIVE_SEO,
+  FETCH_SEO_REQUEST,
+  FETCH_SEO_SUCCESS,
+  FETCH_SEO_FAILURE,
 } from './actionTypes';
+import { ACTION_KEY } from '../middleware/clientMiddleware';
 
-export const fetchSeoDataAction = () => (
-  {
-    type: RECEIVE_SEO,
-    seo: fetch('../../../api/seo.json').then(response => response.json()),
-  }
-);
+export const fetchSeoDataAction = () => ({
+  url: '/seo.json',
+  [ACTION_KEY]: {
+    types: [FETCH_SEO_REQUEST, FETCH_SEO_SUCCESS, FETCH_SEO_FAILURE],
+  },
+});
