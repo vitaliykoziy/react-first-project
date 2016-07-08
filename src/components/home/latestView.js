@@ -1,4 +1,7 @@
+//  import modules
 import React, { Component, PropTypes } from 'react';
+import Time from 'react-time';
+//  import styles
 import styles from '../../../static/css/app.css';
 
 export class LatestView extends Component {
@@ -21,7 +24,9 @@ export class LatestView extends Component {
           <h1><a href="#">{this.props.title}</a></h1>
         </header>
         <content>
-          <div className={styles.date}>27 Jun 2016 {this.props.created_at}</div>
+          <div className={styles.date}>
+            <Time value={this.props.created_at * 1000} format="DD MMM YYYY" />
+          </div>
           <p>
             {this.props.content}
           </p>

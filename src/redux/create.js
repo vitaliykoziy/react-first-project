@@ -14,6 +14,7 @@ import callApi from './middleware/clientMiddleware';
 import DevTools from '../containers/DevTools';
 //  import reducers
 import { fetchSeoDataReducer } from './reducers/seo';
+// import { fetchLatestReducer } from './reducers/home';
 import { fetchLatestReducer } from './reducers/home';
 
 function getDebugSessionKey() {
@@ -33,7 +34,9 @@ const enhancer = compose(
 
 const rootReducer = combineReducers({
   seo: fetchSeoDataReducer,
-  latestItemsData: fetchLatestReducer,
+  home: combineReducers({
+    latestItems: fetchLatestReducer,
+  }),
 });
 
 export default createStore(rootReducer, enhancer);

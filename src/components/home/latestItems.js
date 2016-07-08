@@ -20,8 +20,8 @@ class LatestItems extends Component {
   }
 
   getItemView() {
-    if (this.props.latestItemsData !== []) {
-      return this.props.latestItemsData.map(
+    if (this.props.items !== []) {
+      return this.props.items.map(
         (item, index) => <LatestView
           {...item}
           number={index + 1}
@@ -48,11 +48,11 @@ class LatestItems extends Component {
 
 LatestItems.propTypes = {
   fetchLatestAction: PropTypes.func,
-  latestItemsData: PropTypes.array,
+  items: PropTypes.array,
 };
 
 export default connect(
-  state => ({ latestItemsData: state.latestItemsData }),
+  state => ({ items: state.home.latestItems }),
   dispatch => bindActionCreators(
     {
       ...homeActions,
