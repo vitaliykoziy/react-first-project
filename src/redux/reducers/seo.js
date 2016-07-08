@@ -5,8 +5,6 @@ import {
   FETCH_SEO_FAILURE,
 } from '../actions/actionTypes';
 
-// const fetchData = () => (fetch('/seo.json').then(response => response.json()));
-
 export const fetchSeoDataReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_SEO_REQUEST:

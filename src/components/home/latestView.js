@@ -1,4 +1,7 @@
+//  import modules
 import React, { Component, PropTypes } from 'react';
+import Time from 'react-time';
+//  import styles
 import styles from '../../../static/css/app.css';
 
 export class LatestView extends Component {
@@ -6,7 +9,7 @@ export class LatestView extends Component {
     if (this.props.number === 1) {
       return (
         <a href="#">
-          <img src="http://www.mybusiness.com.au/images/technology/debbie-mayo-smith.jpg" alt="empty" />
+          <img src={this.props.image} alt="empty" />
         </a>
       );
     }
@@ -18,14 +21,14 @@ export class LatestView extends Component {
       <article className={styles.latestItem}>
         <header>
           {this.setImage()}
-          <h1><a href="#">Are you wasting your time with Facebook?</a></h1>
+          <h1><a href="#">{this.props.title}</a></h1>
         </header>
         <content>
-          <div className={styles.date}>27 Jun 2016</div>
+          <div className={styles.date}>
+            <Time value={this.props.created_at * 1000} format="DD MMM YYYY" />
+          </div>
           <p>
-            By Debbie Mayo-Smith / 27 Jun 2016
-            It seems the whole marketing world is screaming “Facebook! Facebook!
-            Facebook!” You’ll hear it everywhere: “You must be on Facebook ...
+            {this.props.content}
           </p>
           <div className={styles.readMore}>
             <a href="#">Read more</a>
@@ -38,4 +41,8 @@ export class LatestView extends Component {
 
 LatestView.propTypes = {
   number: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  created_at: PropTypes.number.isRequired,
+  content: PropTypes.string.isRequired,
 };

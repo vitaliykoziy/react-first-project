@@ -5,7 +5,7 @@
 import 'isomorphic-fetch';
 
 //  Action key that carries API call info interpreted by this Redux middleware
-export const ACTION_KEY = Symbol('Action Key');
+export const CALL_API = Symbol('Call API');
 
 
 function callApi(url) {
@@ -22,13 +22,12 @@ function callApi(url) {
 }
 
 export default store => next => action => {
-  const currentAction = action[ACTION_KEY];
+  const currentAction = action[CALL_API];
   if (typeof currentAction === 'undefined') {
     return next(action);
   }
 
-  const { url } = action;
-  const { types } = currentAction;
+  const { url, types } = currentAction;
 
   if (typeof url !== 'string') {
     throw new Error('Specify a string URL.');
@@ -45,7 +44,7 @@ export default store => next => action => {
   // set new action data which is used in next()
   function reduceAction(data) {
     const finalAction = Object.assign({}, action, data);
-    delete finalAction[ACTION_KEY];
+    delete finalAction[CALL_API];
     return finalAction;
   }
 

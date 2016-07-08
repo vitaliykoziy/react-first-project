@@ -1,5 +1,5 @@
 import React from 'react';
-import { LatestItems } from './latestItems';
+import LatestItems from './latestItems';
 import { FeaturedItems } from './featuredItems';
 import { PopularCategories } from './popularCategories';
 import styles from '../../../static/css/app.css';
