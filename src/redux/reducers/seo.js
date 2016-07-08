@@ -12,7 +12,7 @@ export const fetchSeoDataReducer = (state = {}, action) => {
     case FETCH_SEO_REQUEST:
       return state;
     case FETCH_SEO_SUCCESS:
-      return action.response.home;
+      return action.response[action.seoKey];
     case FETCH_SEO_FAILURE:
       return {};
     default:

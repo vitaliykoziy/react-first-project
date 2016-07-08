@@ -12,7 +12,7 @@ import { seoActions } from '../redux/actions/index';
 //  import styles
 import styles from '../../static/css/app.css';
 
-const fetchSeoData = props => props.fetchSeoDataAction();
+const fetchSeoData = props => props.fetchSeoDataAction('home');
 
 class Home extends Component {
   constructor(props) {
@@ -23,24 +23,7 @@ class Home extends Component {
   render() {
     return (
       <div className={styles.homeContent}>
-        <Helmet
-          title="Home"
-          meta={
-            [
-              {
-                name: 'description',
-                content: 'Home Helmet application',
-              },
-              {
-                property: 'og:type',
-                content: 'home article',
-              },
-            ]
-          }
-        />
-        <button onClick={() => (fetchSeoData(this.props))} className={styles.mrl10}>
-          TESTSTSTS
-        </button>
+        <Helmet {...this.props.seo} />
         <FullWidthAdvertising />
         <BarsContainer />
         <MayLike />
@@ -50,6 +33,7 @@ class Home extends Component {
 }
 Home.propTypes = {
   fetchSeoDataAction: PropTypes.func,
+  seo: PropTypes.object,
 };
 
 export default connect(

@@ -5,8 +5,9 @@ import {
 } from './actionTypes';
 import { ACTION_KEY } from '../middleware/clientMiddleware';
 
-export const fetchSeoDataAction = () => ({
+export const fetchSeoDataAction = (seoKey) => ({
   url: '/seo.json',
+  seoKey,
   [ACTION_KEY]: {
     types: [FETCH_SEO_REQUEST, FETCH_SEO_SUCCESS, FETCH_SEO_FAILURE],
   },

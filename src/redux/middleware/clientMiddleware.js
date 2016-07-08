@@ -13,6 +13,7 @@ function callApi(url) {
     response => response.json().then(json => ({ json, response }))
   ).then(
     ({ json, response }) => {
+// response.ok - Boolean for successful response (status in the range 200-299 is true else false)
       if (!response.ok) {
         return Promise.reject(json);
       }
