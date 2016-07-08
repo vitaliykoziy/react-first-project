@@ -27,8 +27,7 @@ export default store => next => action => {
     return next(action);
   }
 
-  const { url } = action;
-  const { types } = currentAction;
+  const { url, types } = currentAction;
 
   if (typeof url !== 'string') {
     throw new Error('Specify a string URL.');
