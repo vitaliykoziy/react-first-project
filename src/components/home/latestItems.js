@@ -11,7 +11,6 @@ import { LatestView } from './latestView';
 import styles from '../../../static/css/app.css';
 
 const fetchLatestItemsData = props => props.fetchLatestAction();
-const getItemKey = (name, uid) => name + uid;
 
 class LatestItems extends Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class LatestItems extends Component {
         (item, index) => <LatestView
           {...item}
           number={index + 1}
-          key={getItemKey('latest_', item.id)}
+          key={`latest_${item.id}`}
         />
       );
     }
