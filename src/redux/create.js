@@ -13,8 +13,8 @@ import callApi from './middleware/clientMiddleware';
 //  import containers
 import DevTools from '../containers/DevTools';
 //  import reducers
-import { CounterReducer } from './reducers/counter';
 import { fetchSeoDataReducer } from './reducers/seo';
+import { fetchLatestReducer } from './reducers/home';
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -32,8 +32,8 @@ const enhancer = compose(
 );
 
 const rootReducer = combineReducers({
-  counter: CounterReducer,
   seo: fetchSeoDataReducer,
+  latestItemsData: fetchLatestReducer,
 });
 
 export default createStore(rootReducer, enhancer);
