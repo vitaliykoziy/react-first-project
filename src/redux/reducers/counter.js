@@ -3,7 +3,7 @@ import {
   DECREMENT,
   INCREMENT_10,
   DECREMENT_10,
-} from '../actionTypes';
+} from '../actions/actionTypes';
 import initialState from '../initialstate';
 
 export const CounterReducer = (state = initialState, action) => {
@@ -20,4 +20,3 @@ export const CounterReducer = (state = initialState, action) => {
       return initialState;
   }
 };
-

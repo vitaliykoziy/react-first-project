@@ -1,0 +1,15 @@
+{
+  "home": {
+    "title": "Home",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Home Helmet application"
+      },
+      {
+        "property": "og:type",
+        "content": "home article"
+      }
+    ]
+  }
+}
