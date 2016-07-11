@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 //  import components
 import { FullWidthAdvertising } from './fullWidthAdvertising';
 import { MayLike } from './home/mayLike';
-import { BarsContainer } from './home/barsContainer';
+import BarsContainer from './home/barsContainer';
 //  import actions
 import { seoActions } from '../redux/actions/index';
 //  import styles
