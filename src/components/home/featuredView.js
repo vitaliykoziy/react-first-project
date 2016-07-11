@@ -15,7 +15,7 @@ export const FeaturedView = (props) => (
       <div className={styles.rightSide}>
         <div className={styles.category}>
           <i className="fa fa-tag"></i>
-          <span className={styles.name}>{props.category}</span>
+          <span className={styles.name}>{props.category.title}</span>
         </div>
         <h1><a href="">{props.title}</a></h1>
         <div className={styles.itemStatistic}>
@@ -40,7 +40,7 @@ export const FeaturedView = (props) => (
 FeaturedView.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  category: PropTypes.object.isRequired,
   comments_count: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
 };

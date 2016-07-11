@@ -9,14 +9,28 @@ import {
   FETCH_HOME_FEATURED_FAILURE,
 } from '../actions/actionTypes';
 
-export const fetchLatestReducer = (state = [], action) => {
+const initialState = {
+  isFetching: false,
+  items: {},
+};
+
+export const fetchLatestReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_HOME_LATEST_REQUEST:
-      return state;
+      return Object.assign({}, state, {
+        isFetching: true,
+        items: {},
+      });
     case FETCH_HOME_LATEST_SUCCESS:
-      return action.response;
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: action.response,
+      });
     case FETCH_HOME_LATEST_FAILURE:
-      return [];
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: {},
+      });
     default:
       return state;
   }
