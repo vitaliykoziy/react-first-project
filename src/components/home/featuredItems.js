@@ -1,18 +1,64 @@
-import React from 'react';
+/* eslint react/wrap-multilines: 0 */
+//  import modules
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+//  import components
 import { SeparateLine } from '../separateLine';
 import { FeaturedView } from './featuredView';
+//  import actions
+import { fetchFeaturedAction } from '../../redux/actions/index';
+//  import styles
 import styles from '../../../static/css/app.css';
 
+const fetchfeaturedItemsData = props => props.fetchFeaturedAction();
 
-export const FeaturedItems = () => (
-  <article className={styles.featuredList}>
-    <header>
-      <SeparateLine text="Featured" />
-    </header>
-    <content>
-      {
-        [1, 2, 3].map((item, index) => <FeaturedView key={index} />)
-      }
-    </content>
-  </article>
-);
+class FeaturedItems extends Component {
+  constructor(props) {
+    super(props);
+    fetchfeaturedItemsData(this.props);
+  }
+
+  getItemView() {
+    const { isFetching, items } = this.props.featuredItems;
+    if (isFetching) {
+      return <span>LOADING ....</span>;
+    }
+    return Object.keys(items).map(
+      (key) =>
+        <FeaturedView
+          {...items[key]}
+          key={key}
+        />
+    );
+  }
+
+  render() {
+    return (
+      <article className={styles.featuredList}>
+        <header>
+          <SeparateLine text="Featured" />
+        </header>
+        <content>
+          {this.getItemView()}
+        </content>
+      </article>
+    );
+  }
+}
+
+FeaturedItems.propTypes = {
+  fetchFeaturedAction: PropTypes.func,
+  featuredItems: PropTypes.object,
+};
+
+
+export default connect(
+  state => ({
+    featuredItems: state.home.featuredItems,
+  }),
+  dispatch => bindActionCreators(
+    {
+      fetchFeaturedAction,
+    }, dispatch)
+)(FeaturedItems);

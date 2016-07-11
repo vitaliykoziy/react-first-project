@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 //  import actions
-import { homeActions } from '../../redux/actions/index';
+import { fetchLatestAction } from '../../redux/actions/index';
 //  import components
 import { SeparateLine } from '../separateLine';
 import { LatestView } from './latestView';
@@ -19,16 +19,18 @@ class LatestItems extends Component {
   }
 
   getItemView() {
-    if (this.props.items !== []) {
-      return this.props.items.map(
-        (item, index) => <LatestView
-          {...item}
-          number={index + 1}
-          key={`latest_${item.id}`}
-        />
-      );
+    const { isFetching, items } = this.props.latestItems;
+    if (isFetching) {
+      return <span>LOADING ....</span>;
     }
-    return <span>LOADING ....</span>;
+    return Object.keys(items).map(
+      (key, index) =>
+        <LatestView
+          {...items[key]}
+          number={index + 1}
+          key={key}
+        />
+    );
   }
 
   render() {
@@ -47,13 +49,13 @@ class LatestItems extends Component {
 
 LatestItems.propTypes = {
   fetchLatestAction: PropTypes.func,
-  items: PropTypes.array,
+  latestItems: PropTypes.object,
 };
 
 export default connect(
-  state => ({ items: state.home.latestItems }),
+  state => ({ latestItems: state.home.latestItems }),
   dispatch => bindActionCreators(
     {
-      ...homeActions,
+      fetchLatestAction,
     }, dispatch)
 )(LatestItems);
