@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 //  import actions
-import { homeActions } from '../../redux/actions/index';
+import { fetchLatestAction } from '../../redux/actions/index';
 //  import components
 import { SeparateLine } from '../separateLine';
 import { LatestView } from './latestView';
@@ -54,6 +54,6 @@ export default connect(
   state => ({ items: state.home.latestItems }),
   dispatch => bindActionCreators(
     {
-      ...homeActions,
+      fetchLatestAction,
     }, dispatch)
 )(LatestItems);

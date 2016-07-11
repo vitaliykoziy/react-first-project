@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Ian Thorpe: tips from an elite sportsman that work in business",
+    "id": 7,
+    "category_id": 1,
+    "comments_count": 543,
+    "rating": 3.5,
+    "image": "http://www.mybusiness.com.au/images/podcasts/Tom_Panos.jpg"
+  },
+  {
+    "title": "How I built an international business from a $500 outlay",
+    "id": 8,
+    "category_id": 2,
+    "comments_count": 947,
+    "rating": 5,
+    "image": "http://www.mybusiness.com.au/images/leadership/Groysberg.jpg"
+  },
+  {
+    "title": "‘How I'm shaking up the retail experience’",
+    "id": 9,
+    "category_id": 5,
+    "comments_count": 682,
+    "rating": 2.5,
+    "image": "http://www.mybusiness.com.au/images/leadership/thesupercool2.jpg"
+  }
+]

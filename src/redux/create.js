@@ -15,7 +15,7 @@ import DevTools from '../containers/DevTools';
 //  import reducers
 import { fetchSeoDataReducer } from './reducers/seo';
 // import { fetchLatestReducer } from './reducers/home';
-import { fetchLatestReducer } from './reducers/home';
+import { fetchLatestReducer, fetchFeaturedReducer } from './reducers/home';
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -36,6 +36,7 @@ const rootReducer = combineReducers({
   seo: fetchSeoDataReducer,
   home: combineReducers({
     latestItems: fetchLatestReducer,
+    featuredItems: fetchFeaturedReducer,
   }),
 });
 

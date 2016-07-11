@@ -1,26 +1,30 @@
-import React from 'react';
+//  import modules
+import React, { PropTypes } from 'react';
+
+//  import styles
 import styles from '../../../static/css/app.css';
 
-export const FeaturedView = () => (
+export const FeaturedView = (props) => (
   <article className={styles.featuredItem}>
     <header>
       <div className={styles.leftSide}>
         <a href="">
-          <img src="http://www.mybusiness.com.au/images/technology/debbie-mayo-smith.jpg" alt="empty" />
+          <img src={props.image} alt="" />
         </a>
       </div>
       <div className={styles.rightSide}>
         <div className={styles.category}>
           <i className="fa fa-tag"></i>
-          <span className={styles.name}>LEADERSHIP</span>
+          <span className={styles.name}>{props.category_id}LEADERSHIP</span>
         </div>
-        <h1><a href="">Are you wasting your time with Facebook?</a></h1>
+        <h1><a href="">{props.title}</a></h1>
         <div className={styles.itemStatistic}>
           <div className={styles.commentsCount}>
             <i className="fa fa-comments"></i>
-            <span className={styles.value}>543</span>
+            <span className={styles.value}>{props.comments_count}</span>
           </div>
           <div className={styles.rating}>
+            {props.rating}
             <i className="fa fa-star"></i>
             <i className="fa fa-star"></i>
             <i className="fa fa-star"></i>
@@ -32,3 +36,11 @@ export const FeaturedView = () => (
     </header>
   </article>
 );
+
+FeaturedView.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  category_id: PropTypes.number.isRequired,
+  comments_count: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
+};
