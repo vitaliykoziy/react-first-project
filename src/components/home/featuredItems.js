@@ -20,16 +20,17 @@ class FeaturedItems extends Component {
   }
 
   getItemView() {
-    if (this.props.items !== []) {
-      return this.props.items.map(
-        (item) =>
-          <FeaturedView
-            {...item}
-            key={item.id}
-          />
-      );
+    const { isFetching, items } = this.props.featuredItems;
+    if (isFetching) {
+      return <span>LOADING ....</span>;
     }
-    return <span>LOADING ....</span>;
+    return Object.keys(items).map(
+      (key) =>
+        <FeaturedView
+          {...items[key]}
+          key={key}
+        />
+    );
   }
 
   render() {
@@ -48,13 +49,13 @@ class FeaturedItems extends Component {
 
 FeaturedItems.propTypes = {
   fetchFeaturedAction: PropTypes.func,
-  items: PropTypes.array,
+  featuredItems: PropTypes.object,
 };
 
 
 export default connect(
   state => ({
-    items: state.home.featuredItems,
+    featuredItems: state.home.featuredItems,
   }),
   dispatch => bindActionCreators(
     {

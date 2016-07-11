@@ -36,14 +36,23 @@ export const fetchLatestReducer = (state = initialState, action) => {
   }
 };
 
-export const fetchFeaturedReducer = (state = [], action) => {
+export const fetchFeaturedReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_HOME_FEATURED_REQUEST:
-      return state;
+      return Object.assign({}, state, {
+        isFetching: true,
+        items: {},
+      });
     case FETCH_HOME_FEATURED_SUCCESS:
-      return action.response;
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: action.response,
+      });
     case FETCH_HOME_FEATURED_FAILURE:
-      return [];
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: {},
+      });
     default:
       return state;
   }
