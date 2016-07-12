@@ -5,40 +5,36 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getValues } from 'redux-form';
 //  import components
-import LoginForm, { formName } from './loginForm';
+import SignUpForm, { formName } from './signUpForm';
 //  import actions
 import { seoActions } from '../../redux/actions/index';
 //  import styles
-import styles from './login.css';
+import styles from './signUp.css';
 
-const fetchSeoData = props => props.fetchSeoDataAction('login');
+const fetchSeoData = props => props.fetchSeoDataAction('signUp');
 
-class Login extends Component {
+class SignUp extends Component {
   componentWillMount() {
     fetchSeoData(this.props);
   }
 
-  handleSubmitLoginForm = () => {
+  handleSubmitSignUpForm = () => {
     const submitedData = getValues(this.props.form[formName]);
     if (!submitedData) {
       return alert('Please follow all fields');
     }
-    if (submitedData.email === 'test@test.com' && submitedData.password === 'demo123') {
-      return alert('Success!');
-    }
-    return alert('User not found');
+    return alert('User already exist :(');
   };
   render() {
     return (
       <div className={styles.content}>
         <Helmet {...this.props.seo} />
-        <small>test@test.com | demo123</small>
-        <LoginForm onSubmit={() => this.handleSubmitLoginForm()} />
+        <SignUpForm onSubmit={this.handleSubmitSignUpForm} />
       </div>
     );
   }
 }
-Login.propTypes = {
+SignUp.propTypes = {
   fetchSeoDataAction: PropTypes.func,
   seo: PropTypes.object,
   form: PropTypes.object,
@@ -52,4 +48,4 @@ export default connect(
     {
       ...seoActions,
     }, dispatch)
-)(Login);
+)(SignUp);

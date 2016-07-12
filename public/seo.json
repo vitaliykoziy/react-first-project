@@ -24,5 +24,18 @@
         "content": "Login article"
       }
     ]
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Sign Up application"
+      },
+      {
+        "property": "og:type",
+        "content": "Sign Up article"
+      }
+    ]
   }
 }

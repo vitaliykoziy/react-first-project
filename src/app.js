@@ -5,7 +5,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Header } from './components/layout/header';
 import { Footer } from './components/layout/footer';
 import Home from './components/home/home';
-import Login from './components/Login/login';
+import Login from './components/login/login';
+import SignUp from './components/signUp/signUp';
 import { NotFound } from './components/notFound/notFound';
 
 const Wrapper = ({ children }) => (
@@ -26,6 +27,7 @@ export const App = () => (
     <Route path="/" component={Wrapper}>
       <IndexRoute component={Home} />
       <Route path="/login" component={Login} />
+      <Route path="/sign-up" component={SignUp} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
