@@ -1,0 +1,43 @@
+@import "../../../static/css/app";
+:local {
+    .content{
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 200px;
+    }
+    .loginForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 320px;
+        border: 2px solid $fieryOrange;
+        padding: 20px; }
+
+    .inputGroup{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+    }
+    .loginButtonSection{
+        display: flex;
+        justify-content: flex-end;
+        &>button {
+            background: $ceriseRed;
+            color: $white;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 6px 12px;
+            text-align: center;
+            white-space: nowrap;
+            background-color: $fern;
+            border-color: $fruitSalad;
+            &:hover, &:focus{
+                cursor: pointer;
+            }
+        }
+    }
+}
