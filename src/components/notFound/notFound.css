@@ -1,0 +1,9 @@
+@import "../../../static/css/app";
+:local {
+    .content{
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,118 @@
+@import "colors";
+
+@define-mixin contentPostion {
+    max-width: 1024px;
+    width: 100%;
+}
+@define-mixin pageBackground {
+    background: $white;
+}
+
+:root{
+    body{
+        margin: 0;
+        @mixin pageBackground;
+    }
+    a{
+        text-decoration: none;
+        color: inherit;
+        &:hover, &:focus{
+            color: $ceriseRed !important;
+        }
+    }
+    ul{
+        li{
+            display: inline-block;
+        }
+    }
+}
+
+:local {
+    .headerContent {
+        display: flex;
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        width: 100%;
+        background-color: $black;
+        font-size: 24px;
+        justify-content: center;
+        &, a{
+            color: $white;
+        }
+    }
+    .navigationContent {
+        @mixin contentPostion;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        ul {
+            li{
+
+                margin-left: 30px;
+            }
+        }
+    }
+    .footer{
+        min-height: 150px;
+        margin-top: 20px;
+        background-color: $black;
+        color: $white;
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+    }
+    .footerContent{
+        @mixin contentPostion;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .separateLine{
+        @mixin contentPostion;
+        position: relative;
+        height: 0px;
+        border-top: 3px solid $black;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        h3{
+            @mixin pageBackground;
+            display: inline-block;
+            position: relative;
+            padding: 0 17px;
+            top: -30px;
+            font-size: 18px;
+            color: $fieryOrange;
+            text-transform: uppercase;
+        }
+    }
+    .fs22{
+        font-size: 22px;
+    }
+}
+
+@media (max-width:730px) {
+    .homeContent {
+        .barsWraper {
+            flex-direction: column;
+            .leftBar {
+                width: 100%;
+            }
+            .rightBar {
+                width: 100%;
+            }
+        }
+        .mayLikeItems{
+            .wrapper{
+                .item{
+                    width: 45%;
+                    border-bottom: 2px solid $gallery;
+                    padding-bottom: 20px;
+                }
+
+            }
+        }
+    }
+
+}

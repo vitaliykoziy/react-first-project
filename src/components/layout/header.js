@@ -2,9 +2,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 //  import components
-import { Image } from '../utils/image';
+import { Image } from '../../utils/image';
 //  import styles
-import styles from '../../static/css/app.css';
+import styles from '../../../static/css/_app.css';
 
 export const Header = () => (
   <header className={styles.headerContent}>

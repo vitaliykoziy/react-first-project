@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //  import components
 import { FullWidthAdvertising } from './fullWidthAdvertising';
-import { MayLike } from './home/mayLike';
-import { BarsContainer } from './home/barsContainer';
+import { MayLike } from './mayLike';
+import { BarsContainer } from './barsContainer';
 //  import actions
-import { seoActions } from '../redux/actions/index';
+import { seoActions } from '../../redux/actions/index';
 //  import styles
-import styles from '../../static/css/app.css';
+import styles from './home.css';
 
 const fetchSeoData = props => props.fetchSeoDataAction('home');
 

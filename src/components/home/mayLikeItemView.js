@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../static/css/app.css';
+import styles from './home.css';
 
 export const MayLikeItemView = () => (
   <article className={styles.item}>

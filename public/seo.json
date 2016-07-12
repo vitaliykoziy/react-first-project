@@ -11,5 +11,18 @@
         "content": "home article"
       }
     ]
+  },
+  "login": {
+    "title": "Login",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Login application"
+      },
+      {
+        "property": "og:type",
+        "content": "Login article"
+      }
+    ]
   }
 }

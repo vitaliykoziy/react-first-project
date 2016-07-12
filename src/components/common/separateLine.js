@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import styles from '../../static/css/app.css';
+import styles from '../../../static/css/_app.css';
 
 export const SeparateLine = (props) => (
   <div className={styles.separateLine}>

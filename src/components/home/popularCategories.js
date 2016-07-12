@@ -1,7 +1,7 @@
 import React from 'react';
-import { SeparateLine } from '../separateLine';
+import { SeparateLine } from '../common/separateLine';
 import { PopularCategoryView } from './popularCategoryView';
-import styles from '../../../static/css/app.css';
+import styles from './home.css';
 
 
 export const PopularCategories = () => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../static/css/app.css';
+import styles from '../../../static/css/_app.css';
 
 export const Footer = () => (
   <footer className={styles.footer}>
