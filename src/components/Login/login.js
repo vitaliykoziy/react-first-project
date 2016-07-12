@@ -14,8 +14,7 @@ import styles from './login.css';
 const fetchSeoData = props => props.fetchSeoDataAction('login');
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     fetchSeoData(this.props);
   }
 

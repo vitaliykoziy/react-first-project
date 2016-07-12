@@ -14,8 +14,7 @@ import styles from './home.css';
 const fetchfeaturedItemsData = props => props.fetchFeaturedAction();
 
 class FeaturedItems extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     fetchfeaturedItemsData(this.props);
   }
 

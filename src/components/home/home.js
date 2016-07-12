@@ -15,8 +15,7 @@ import styles from './home.css';
 const fetchSeoData = props => props.fetchSeoDataAction('home');
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     fetchSeoData(this.props);
   }
 

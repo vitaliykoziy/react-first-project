@@ -13,8 +13,7 @@ import styles from './home.css';
 const fetchLatestItemsData = props => props.fetchLatestAction();
 
 class LatestItems extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     fetchLatestItemsData(this.props);
   }
 
