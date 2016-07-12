@@ -1,21 +1,25 @@
+//  import modules
 import React from 'react';
+import { Link } from 'react-router';
+//  import components
 import { Image } from '../utils/image';
+//  import styles
 import styles from '../../static/css/app.css';
 
 export const Header = () => (
   <header className={styles.headerContent}>
     <nav className={styles.navigationContent}>
       <div>
-        <a href="/">
+        <Link to="/">
           <Image src="logo.png" alt="Logo" />
-        </a>
+        </Link>
       </div>
       <ul>
         <li>
-          <a href="/">first</a>
+          <Link to="/login">Login</Link>
         </li>
         <li>
-          <a href="/">second</a>
+          <Link to="/sign-up">Sign Up</Link>
         </li>
       </ul>
     </nav>
