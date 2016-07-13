@@ -90,6 +90,13 @@
     .fs22{
         font-size: 22px;
     }
+    .hasError{
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        color: red;
+        font-style: italic;
+    }
 }
 
 @media (max-width:730px) {
