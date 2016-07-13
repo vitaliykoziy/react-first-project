@@ -1,23 +1,9 @@
-/* eslint no-param-reassign:0 */
 //  import modules
 import React, { PropTypes } from 'react';
-
+//  import utils
+import { Rating } from '../common/rating';
 //  import styles
 import styles from './home.css';
-
-const getStar = (rait) => (
-    [1, 2, 3, 4, 5].map((val) => {
-      if (rait > 1) {
-        rait--;
-        return <i className="fa fa-star" key={val}></i>;
-      }
-      if (rait > 0 && rait < 1) {
-        rait -= rait % 1;
-        return <i className="fa fa-star-half-empty" key={val}></i>;
-      }
-      return <i className="fa fa-star-o" key={val}></i>;
-    })
-);
 
 export const FeaturedView = (props) => (
   <article className={styles.featuredItem}>
@@ -38,9 +24,7 @@ export const FeaturedView = (props) => (
             <i className="fa fa-comments"></i>
             <span className={styles.value}>{props.comments_count}</span>
           </div>
-          <div className={styles.rating}>
-            {getStar(props.rating)}
-          </div>
+          <Rating rating={props.rating} />
         </div>
       </div>
     </header>
