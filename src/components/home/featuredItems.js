@@ -4,18 +4,17 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 //  import components
-import { SeparateLine } from '../separateLine';
+import { SeparateLine } from '../common/separateLine';
 import { FeaturedView } from './featuredView';
 //  import actions
 import { fetchFeaturedAction } from '../../redux/actions/index';
 //  import styles
-import styles from '../../../static/css/app.css';
+import styles from './home.css';
 
 const fetchfeaturedItemsData = props => props.fetchFeaturedAction();
 
 class FeaturedItems extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     fetchfeaturedItemsData(this.props);
   }
 

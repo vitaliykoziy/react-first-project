@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 
 //  import styles
-import styles from '../../../static/css/app.css';
+import styles from './home.css';
 
 const getStar = (rait) => (
     [1, 2, 3, 4, 5].map((val) => {

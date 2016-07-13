@@ -5,7 +5,7 @@ import LatestItems from './latestItems';
 import FeaturedItems from './featuredItems';
 import { PopularCategories } from './popularCategories';
 //  import styles
-import styles from '../../../static/css/app.css';
+import styles from './home.css';
 import 'font-awesome-webpack';
 
 export const BarsContainer = () => (

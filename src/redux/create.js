@@ -8,6 +8,7 @@ import { persistState } from 'redux-devtools';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import { reducer as formReducer } from 'redux-form';
 //  import client middleware
 import callApi from './middleware/clientMiddleware';
 //  import containers
@@ -32,6 +33,7 @@ const enhancer = compose(
 );
 
 const rootReducer = combineReducers({
+  form: formReducer,
   seo: fetchSeoDataReducer,
   home: combineReducers({
     latestItems: fetchLatestReducer,

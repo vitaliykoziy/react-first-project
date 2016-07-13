@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import Time from 'react-time';
 //  import styles
-import styles from '../../../static/css/app.css';
+import styles from './home.css';
 
 export class LatestView extends Component {
   setImage() {

@@ -11,5 +11,31 @@
         "content": "home article"
       }
     ]
+  },
+  "login": {
+    "title": "Login",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Login application"
+      },
+      {
+        "property": "og:type",
+        "content": "Login article"
+      }
+    ]
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Sign Up application"
+      },
+      {
+        "property": "og:type",
+        "content": "Sign Up article"
+      }
+    ]
   }
 }

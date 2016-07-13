@@ -5,16 +5,15 @@ import { connect } from 'react-redux';
 //  import actions
 import { fetchLatestAction } from '../../redux/actions/index';
 //  import components
-import { SeparateLine } from '../separateLine';
+import { SeparateLine } from '../common/separateLine';
 import { LatestView } from './latestView';
 // import styles
-import styles from '../../../static/css/app.css';
+import styles from './home.css';
 
 const fetchLatestItemsData = props => props.fetchLatestAction();
 
 class LatestItems extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     fetchLatestItemsData(this.props);
   }
 
