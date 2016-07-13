@@ -15,7 +15,7 @@
         border: 2px solid $fieryOrange;
         padding: 20px; }
 
-    .inputGroup{
+    .inputGroup label{
         display: flex;
         flex-direction: row;
         align-items: center;

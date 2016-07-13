@@ -6,25 +6,32 @@ import styles from './login.css';
 
 export const formName = 'login';
 
-const LoginForm = (props) => {
-  const { fields: { password, email }, handleSubmit } = props;
-  return (
-    <form onSubmit={handleSubmit} className={styles.loginForm}>
-      <h1>Login to MyBusiness</h1>
-      <div className={styles.inputGroup}>
-        <label htmlFor="email">Enter Your email</label>
-        <input id="email" type="email" placeholder="email" {...email} />
-      </div>
-      <div className={styles.inputGroup}>
-        <label htmlFor="password">Enter Your password</label>
-        <input id="password" type="password" placeholder="password" {...password} />
-      </div>
-      <div className={styles.loginButtonSection}>
-        <button>Login!</button>
-      </div>
-    </form>
-  );
-};
+const LoginForm = ({
+    fields: {
+      password,
+      email,
+    },
+    handleSubmit,
+  }) => (
+  <form onSubmit={handleSubmit} className={styles.loginForm}>
+    <h1>Login to MyBusiness</h1>
+    <div className={styles.inputGroup}>
+      <label>
+        <span>Enter Your email</span>
+        <input type="email" placeholder="email" {...email} />
+      </label>
+    </div>
+    <div className={styles.inputGroup}>
+      <label>
+        <span>Enter Your password</span>
+        <input type="password" placeholder="password" {...password} />
+      </label>
+    </div>
+    <div className={styles.loginButtonSection}>
+      <button>Login!</button>
+    </div>
+  </form>
+);
 LoginForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
