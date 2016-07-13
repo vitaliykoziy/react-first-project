@@ -1,3 +1,4 @@
+/* eslint import/no-unresolved: 0 */
 //  import modules
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
