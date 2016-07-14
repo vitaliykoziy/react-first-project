@@ -9,28 +9,49 @@ import { Rating } from '../common/rating';
 import { Map } from '../../utils/googleMap';
 // import components
 import { SeparateLine } from '../common/separateLine';
+import { Comment } from './comment';
 //  import actions
-import { seoActions } from '../../redux/actions/index';
+import {
+  seoActions,
+  fetchPostDataAction,
+  fetchPostCommentsAction,
+} from '../../redux/actions/index';
 //  import styles
 import styles from './post.css';
 import 'font-awesome-webpack';
 
 const fetchSeoData = props => props.fetchSeoDataAction('post');
-const mapData = {
-  markers: [{
-    position: {
-      lat: 48.914370,
-      lng: 24.710871,
+const fetchPostData = props => props.fetchPostDataAction(props.routeParams.id);
+const fetchPostComments = props => props.fetchPostCommentsAction(props.routeParams.id);
+const setMapData = (location) => (
+  {
+    markers: [{
+      position: {
+        lat: location.latitude,
+        lng: location.longitude,
+      },
+    }],
+    defaultCenter: {
+      lat: location.latitude,
+      lng: location.longitude,
     },
-  }],
-  defaultCenter: {
-    lat: 48.914370,
-    lng: 24.710871,
-  },
-};
+  }
+);
+
+
 class PostView extends Component {
   componentWillMount() {
     fetchSeoData(this.props);
+    fetchPostData(this.props);
+    fetchPostComments(this.props);
+  }
+
+  renderMapView() {
+    const { isFetching, post } = this.props.postData;
+    if (isFetching) {
+      return <span>LOADING ....</span>;
+    }
+    return <Map {...setMapData(post.location)} />;
   }
 
   render() {
@@ -40,66 +61,28 @@ class PostView extends Component {
         <article className={styles.post}>
           <header>
             <div className={styles.information}>
-              <Time value={1467971242 * 1000} format="DD MMM YYYY" />
-              <Rating rating={3.5} />
+              <Time value={this.props.postData.post.created_at * 1000} format="DD MMM YYYY" />
+              <Rating rating={this.props.postData.post.rating} />
             </div>
-            <h1>Are you wasting your time with Facebook?</h1>
+            <h1>{this.props.postData.post.title}</h1>
           </header>
           <content>
             <p>
-              <img className={styles.leftImage} src="http://www.mybusiness.com.au/images/technology/debbie-mayo-smith.jpg" alt="post" />
-              Lorem ipsum dolor sit amet, eu qui viris facilisis consequuntur,
-              ea quis putent alienum cum, sonet corpora facilisis et duo.
-              Facilis qualisque inciderint ne vim, per melius commune id,
-              albucius facilisi eum et. Mel ea debet patrioque,
-              soleat audiam interpretaris qui at. Eu eos tantas vivendo patrioque,
-              ponderum postulant vim no.
-              Error noluisse splendide no vim. Ne rebum malorum persius his.
-
-              Vidit debitis cu his, habeo salutandi facilisis qui et. Magna alienum oporteat cum ea,
-              id vide nemore dissentias sed. No cum dico ludus, ex his oporteat instructior.
-              Idque quidam intellegam eos ut.
-
-              No sale tempor feugiat mei, id patrioque assentior vel, sonet vidisse eos ad.
-              Ornatus repudiare conclusionemque ea eum, ullum errem doctus mel ex,
-              sed cu oportere contentiones. Mea oblique insolens ad,
-              epicuri oporteat delicatissimi id pri.
-              Tempor feugait ea qui. Dictas denique has an, at simul accusata quaestio vix.
-              Et mei natum necessitatibus, diam case patrioque ne quo, no justo saperet per.
-
-              Pro at audiam noluisse inciderint, eam an hinc delectus consulatu.
-              In vide altera sea, sea magna recteque scriptorem ex.
-              No qui graece vulputate, pri at libris inermis. Usu prima quidam eu.
-              Sint vocibus ut qui, id mea novum labore. Sea facer aliquip ne, nec id putant legimus.
-              Utamur officiis at has, te nullam accommodare sea.
-
-              Eu postea delicatissimi eam, hinc fuisset ius te.
-              Sit novum omnes fastidii ne, elitr urbanitas necessitatibus sit at.
-              Qui persius omittam te, id pri nibh aperiri.
-              Altera persequeris conclusionemque at sea, duo te eros rebum eripuit.
+              <img className={styles.leftImage} src={this.props.postData.post.image} alt="post" />
+              {this.props.postData.post.content}
             </p>
           </content>
           <hr />
           <h2>Find us on the map</h2>
-          <Map {...mapData} />
+          {this.renderMapView()}
         </article>
         <div className={styles.commentsSection}>
           <SeparateLine text="Comments" />
-          <div className={styles.comment}>
-            <div className={styles.author}>Kokos Kokosovych</div>
-            <div className={styles.message}>
-              Hello i am comment
-            </div>
-            <div className={styles.separateLine}></div>
-          </div>
-
-          <div className={styles.comment}>
-            <div className={styles.author}>Kokos Kokosovych</div>
-            <div className={styles.message}>
-              Hello i am comment
-            </div>
-            <div className={styles.separateLine}></div>
-          </div>
+          {
+            this.props.commentsData.comments.map((comment, index) => (
+              <Comment {...comment} key={index} />
+            ))
+          }
         </div>
       </div>
     );
@@ -107,13 +90,23 @@ class PostView extends Component {
 }
 PostView.propTypes = {
   fetchSeoDataAction: PropTypes.func,
+  fetchPostCommentsAction: PropTypes.func,
+  fetchPostDataAction: PropTypes.func,
   seo: PropTypes.object,
+  postData: PropTypes.object.isRequired,
+  commentsData: PropTypes.object,
 };
 
 export default connect(
-  state => ({ seo: state.seo }),
+  state => ({
+    seo: state.seo,
+    postData: state.posts.data,
+    commentsData: state.posts.comments,
+  }),
   dispatch => bindActionCreators(
     {
       ...seoActions,
+      fetchPostDataAction,
+      fetchPostCommentsAction,
     }, dispatch)
 )(PostView);

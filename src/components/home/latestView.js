@@ -9,7 +9,7 @@ export class LatestView extends Component {
   setImage() {
     if (this.props.number === 1) {
       return (
-        <Link to={`post/${this.props.id}`}>
+        <Link to={`/post/${this.props.id}`}>
           <img src={this.props.image} alt="empty" />
         </Link>
       );
@@ -22,7 +22,7 @@ export class LatestView extends Component {
       <article className={styles.latestItem}>
         <header>
           {this.setImage()}
-          <h1><Link to={`post/${this.props.id}`}>{this.props.title}</Link></h1>
+          <h1><Link to={`/post/${this.props.id}`}>{this.props.title}</Link></h1>
         </header>
         <content>
           <div className={styles.date}>
@@ -32,7 +32,7 @@ export class LatestView extends Component {
             {this.props.content}
           </p>
           <div className={styles.readMore}>
-            <Link to={`post/${this.props.id}`}>Read more</Link>
+            <Link to={`/post/${this.props.id}`}>Read more</Link>
           </div>
         </content>
       </article>
