@@ -18,7 +18,6 @@ import {
 } from '../../redux/actions/index';
 //  import styles
 import styles from './post.css';
-import 'font-awesome-webpack';
 
 const fetchSeoData = props => props.fetchSeoDataAction('post');
 const fetchPostData = props => props.fetchPostDataAction(props.routeParams.id);
@@ -77,7 +76,7 @@ class PostView extends Component {
           {this.renderMapView()}
         </article>
         <div className={styles.commentsSection}>
-          <SeparateLine text="Comments" />
+          <SeparateLine text="Reviews" />
           {
             this.props.commentsData.comments.map((comment, index) => (
               <Comment {...comment} key={index} />

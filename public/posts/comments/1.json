@@ -1,16 +1,28 @@
 [
   {
     "author": {
+      "logo": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ8alxQ_W-zZ5eB2BgvJtAMSTNrh-I9fH6SPO4wWhns43bDcX5V",
       "first_name": "Mickey",
       "last_name": "Mouse"
     },
-    "message": "It is very helpful"
+    "message": "It is very helpful",
+    "likes":{
+      "likeStatus": 1,
+      "like": 5,
+      "unlike": 0
+    }
   },
   {
     "author": {
+      "logo": "https://blog.eu.playstation.com/files/avatars/avatar_184295.jpg",
       "first_name": "James",
       "last_name": "Bond"
     },
-    "message": "It is amazing. Thanks bro :)"
+    "message": "It is amazing. Thanks bro :)",
+    "likes":{
+      "likeStatus": 0,
+      "like": 26,
+      "unlike": 4
+    }
   }
 ]

@@ -37,16 +37,45 @@
                 justify-content: flex-start;
                 .author{
                     margin-bottom: 10px;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    img {
+                        width: 50px;
+                        border-radius: 50px;
+                    margin-right: 10px;
+                    }
+                }
+                .commentInfo{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    .likeSection{
+                        i {
+                            margin-left:40px;
+                            color: $fieryOrange;
+                            &:hover{
+                                cursor:pointer;
+                            }
+                            .value{
+                                padding-left:10px;
+                            }
+                        }
+
+                    }
+
                 }
                 .message {
                     margin-bottom: 10px;
                     padding: 40px;
                     background-color: $gallery;
+                    font-style: italic;
+                    border-radius: 20px;
+                    box-shadow: 5px 5px 5px $silver;
                 }
                 .separateLine{
-                    height: 2px;
-                    background-color: $ceriseRed;
-                    border: none;
+                    border-top: 1px dashed $black;
                 }
             }
         }
