@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import Time from 'react-time';
 //  import utils
 import { Rating } from '../common/rating';
-import { Map } from '../../utils/googleMap';
+import { Map } from '../../utils/googleMap/googleMap';
 // import components
 import { SeparateLine } from '../common/separateLine';
 import { Comment } from './comment';
@@ -29,11 +29,19 @@ const setMapData = (location) => (
         lat: location.latitude,
         lng: location.longitude,
       },
+      opacity: 1,
+      label: "+",
+      title:"Kokos",
     }],
     defaultCenter: {
       lat: location.latitude,
       lng: location.longitude,
     },
+    places:{
+      PlaceResult:{
+        html_attributions: ["kokos"]
+      }
+    }
   }
 );
 

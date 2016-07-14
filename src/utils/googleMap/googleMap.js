@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
-import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
+import { PlaceInfoWindow } from './placeInfoWindow';
 export const Map = (props) => (
   <section style={props.sectionStyle}>
     <GoogleMapLoader
+      query={{ libraries: "geometry,drawing,places,visualization" }}
       containerElement={
         <div
           {...props}
@@ -16,8 +18,12 @@ export const Map = (props) => (
         >
           {
             props.markers.map((marker) => (
-              <Marker {...marker} />
-            )
+                <Marker {...marker} >
+                  <InfoWindow>
+                    <PlaceInfoWindow />
+                  </InfoWindow>
+                </Marker>
+              )
             )
           }
         </GoogleMap>
