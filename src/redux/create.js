@@ -14,10 +14,20 @@ import callApi from './middleware/clientMiddleware';
 //  import containers
 import DevTools from '../containers/DevTools';
 //  import reducers
-import { fetchSeoDataReducer } from './reducers/seo';
-import { fetchLatestReducer, fetchFeaturedReducer } from './reducers/home';
-import { fetchPostDataReducer, fetchPostCommentsReducer } from './reducers/posts';
-import { toggleGoogleMarkerInfoWindowReducer } from './reducers/googleMarkerInfoWindow';
+import {
+  fetchSeoDataReducer,
+} from './reducers/seo';
+import {
+  fetchLatestReducer,
+  fetchFeaturedReducer,
+} from './reducers/home';
+import {
+  fetchPostDataReducer,
+  fetchPostCommentsReducer,
+} from './reducers/posts';
+import {
+  googleMarkersDataReducer,
+} from './reducers/googleMap';
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -44,9 +54,9 @@ const rootReducer = combineReducers({
   posts: combineReducers({
     data: fetchPostDataReducer,
     comments: fetchPostCommentsReducer,
-  }),
-  googleMap: combineReducers({
-    infoWindow: toggleGoogleMarkerInfoWindowReducer,
+    googleMap: combineReducers({
+      markers: googleMarkersDataReducer,
+    }),
   }),
 });
 

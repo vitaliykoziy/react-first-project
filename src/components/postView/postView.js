@@ -15,6 +15,7 @@ import {
   seoActions,
   fetchPostDataAction,
   fetchPostCommentsAction,
+  setMapMarkersAction,
 } from '../../redux/actions/index';
 //  import styles
 import styles from './post.css';
@@ -22,24 +23,27 @@ import styles from './post.css';
 const fetchSeoData = props => props.fetchSeoDataAction('post');
 const fetchPostData = props => props.fetchPostDataAction(props.routeParams.id);
 const fetchPostComments = props => props.fetchPostCommentsAction(props.routeParams.id);
-const setMapData = (location) => (
-  {
-    markers: [{
-      position: {
-        lat: location.latitude,
-        lng: location.longitude,
-      },
-      opacity: 1,
-      infoWindow: {
-        show: false
-      },
-    }],
-    defaultCenter: {
-      lat: location.latitude,
-      lng: location.longitude,
-    },
+const setMapData = (props) => {
+  if (!props.postData.isFetching) {
+    const markers = [];
+    props.postData.post.locations.map((location) => (
+      markers.push({
+        position: {
+          lat: location.latitude,
+          lng: location.longitude,
+        },
+        opacity: 1,
+        infoWindow: {
+          show: false,
+          title: location.title,
+          telephone: location.telephone,
+          fax: location.fax,
+        },
+      })
+    ));
+    props.setMapMarkersAction(markers);
   }
-);
+};
 
 
 class PostView extends Component {
@@ -47,14 +51,15 @@ class PostView extends Component {
     fetchSeoData(this.props);
     fetchPostData(this.props);
     fetchPostComments(this.props);
+    setMapData(this.props);
   }
 
   renderMapView() {
-    const { isFetching, post } = this.props.postData;
+    const { isFetching, data } = this.props.googleMap.markers;
     if (isFetching) {
       return <span>LOADING ....</span>;
     }
-    return <Map {...setMapData(post.location)} />;
+    return <Map defaultCenter={data[0].position} />;
   }
 
   render() {
@@ -95,9 +100,11 @@ PostView.propTypes = {
   fetchSeoDataAction: PropTypes.func,
   fetchPostCommentsAction: PropTypes.func,
   fetchPostDataAction: PropTypes.func,
+  setMapMarkersAction: PropTypes.func,
   seo: PropTypes.object,
   postData: PropTypes.object.isRequired,
   commentsData: PropTypes.object,
+  googleMap: PropTypes.object,
 };
 
 export default connect(
@@ -105,11 +112,13 @@ export default connect(
     seo: state.seo,
     postData: state.posts.data,
     commentsData: state.posts.comments,
+    googleMap: state.posts.googleMap,
   }),
   dispatch => bindActionCreators(
     {
       ...seoActions,
       fetchPostDataAction,
       fetchPostCommentsAction,
+      setMapMarkersAction,
     }, dispatch)
 )(PostView);
