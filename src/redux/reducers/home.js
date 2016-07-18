@@ -1,4 +1,3 @@
-// import fetch from 'isomorphic-fetch';
 import {
   FETCH_HOME_LATEST_REQUEST,
   FETCH_HOME_LATEST_SUCCESS,

@@ -1,4 +1,3 @@
-// import fetch from 'isomorphic-fetch';
 import {
   FETCH_SEO_REQUEST,
   FETCH_SEO_SUCCESS,

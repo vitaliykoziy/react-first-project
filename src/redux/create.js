@@ -17,6 +17,7 @@ import DevTools from '../containers/DevTools';
 import { fetchSeoDataReducer } from './reducers/seo';
 import { fetchLatestReducer, fetchFeaturedReducer } from './reducers/home';
 import { fetchPostDataReducer, fetchPostCommentsReducer } from './reducers/posts';
+import { toggleGoogleMarkerInfoWindowReducer } from './reducers/googleMarkerInfoWindow';
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -43,6 +44,9 @@ const rootReducer = combineReducers({
   posts: combineReducers({
     data: fetchPostDataReducer,
     comments: fetchPostCommentsReducer,
+  }),
+  googleMap: combineReducers({
+    infoWindow: toggleGoogleMarkerInfoWindowReducer,
   }),
 });
 
