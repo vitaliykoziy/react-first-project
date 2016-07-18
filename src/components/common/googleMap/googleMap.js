@@ -4,17 +4,25 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { PlaceInfoWindow } from './placeInfoWindow';
 //  import actions
-import { showInfoWindowAction, closeInfoWindowAction } from '../../../redux/actions/index';
+import {
+  showInfoWindowAction,
+  closeInfoWindowAction,
+} from '../../../redux/actions/index';
 class Map extends Component {
   showInfoWindow(marker, index) {
-    if (!marker.infoWindow.show) {
+    const { show, title, fax, telephone } = marker.infoWindow;
+    if (!show) {
       return <span></span>;
     }
     return (
       <InfoWindow
         onCloseclick={() => this.handleClickInfoWindow(index)}
       >
-        <PlaceInfoWindow />
+        <PlaceInfoWindow
+          title={title}
+          fax={fax}
+          telephone={telephone}
+        />
       </InfoWindow>
     );
   }

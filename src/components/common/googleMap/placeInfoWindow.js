@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export const PlaceInfoWindow = () => (
+export const PlaceInfoWindow = ({
+  title,
+  telephone,
+  fax,
+}) => (
   <div>
-    <div className="rating__rating__73C4V">
-      <i className="fa fa-star"></i>
-      <i className="fa fa-star"></i>
-      <i className="fa fa-star"></i>
-      <i className="fa fa-star-half-empty"></i>
-      <i className="fa fa-star-o"></i>
-    </div>
-    <h1>Are you wasting your time with Facebook?</h1>
+    <h1>{title}</h1>
     <br />
     <div>
-      tel: +38099000900
+      tel: {telephone}
     </div>
     <div>
-      fax: 179536
+      fax: {fax}
     </div>
   </div>
 );
+PlaceInfoWindow.propTypes = {
+  title: PropTypes.string.isRequired,
+  telephone: PropTypes.string.isRequired,
+  fax: PropTypes.string.isRequired,
+};
