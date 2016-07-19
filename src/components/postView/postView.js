@@ -31,19 +31,6 @@ class PostView extends Component {
     fetchPostComments(this.props);
   }
 
-  renderMapView() {
-    const { isFetching, post } = this.props.postData;
-    if (isFetching || !post.googleMap) {
-      return <span>LOADING ....</span>;
-    }
-    return (
-      <Map
-        markers={post.googleMap.markers}
-        defaultCenter={post.googleMap.markers[0].position}
-      />
-    );
-  }
-
   render() {
     return (
       <div className={styles.postContent}>
@@ -62,9 +49,7 @@ class PostView extends Component {
               {this.props.postData.post.content}
             </p>
           </content>
-          <hr />
-          <h2>Find us on the map</h2>
-          {this.renderMapView()}
+          <Map />
         </article>
         <div className={styles.commentsSection}>
           <SeparateLine text="Reviews" />

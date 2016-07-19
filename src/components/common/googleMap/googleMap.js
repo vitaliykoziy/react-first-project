@@ -16,7 +16,7 @@ class Map extends Component {
     }
     return (
       <InfoWindow
-        onCloseclick={() => this.handleClickInfoWindow(index)}
+        onCloseclick={() => this.props.closeInfoWindowAction(index)}
       >
         <PlaceInfoWindow
           title={title}
@@ -27,18 +27,17 @@ class Map extends Component {
     );
   }
 
-  handleClickMarker(index) {
-    this.props.showInfoWindowAction(index);
-  }
-
-  handleClickInfoWindow(index) {
-    this.props.closeInfoWindowAction(index);
-  }
-
   render() {
+    const { isFetching } = this.props.postData;
+    if (isFetching) {
+      return <noscript />;
+    }
     const props = this.props;
+    const markers = this.props.postData.post.googleMap.markers;
     return (
       <section style={props.sectionStyle}>
+        <hr />
+        <h2>Find us on the map</h2>
         <GoogleMapLoader
           query={{ libraries: 'geometry,drawing,places,visualization' }}
           containerElement={
@@ -50,13 +49,13 @@ class Map extends Component {
           googleMapElement={
             <GoogleMap
               defaultZoom={props.defaultZoom}
-              defaultCenter={props.defaultCenter}
+              defaultCenter={markers[0].position}
             >
               {
-                props.markers.map((marker, index) => (
+                markers.map((marker, index) => (
                   <Marker
                     {...marker}
-                    onClick={() => this.handleClickMarker(index)}
+                    onClick={() => props.showInfoWindowAction(index)}
                     key={index}
                   >
                     {this.showInfoWindow(marker, index)}
@@ -71,7 +70,7 @@ class Map extends Component {
   }
 }
 Map.propTypes = {
-  markers: PropTypes.array,
+  postData: PropTypes.object,
   defaultCenter: PropTypes.object,
   showInfoWindowAction: PropTypes.func,
   closeInfoWindowAction: PropTypes.func,
@@ -84,6 +83,7 @@ Map.defaultProps = {
   sectionStyle: {
     height: '300px',
     width: '100%',
+    marginBottom: '30px',
   },
   containerStyle: {
     height: '100%',
@@ -94,7 +94,7 @@ Map.defaultProps = {
 
 export default connect(
   state => ({
-    kokos: state.posts.data,
+    postData: state.posts.data,
   }),
   dispatch => bindActionCreators(
     {
