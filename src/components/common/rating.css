@@ -1,0 +1,6 @@
+@import "../../../static/css/app";
+:local {
+    .rating {
+        color: $gold;
+    }
+}

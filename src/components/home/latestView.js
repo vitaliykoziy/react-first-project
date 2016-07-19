@@ -1,6 +1,7 @@
 //  import modules
 import React, { Component, PropTypes } from 'react';
 import Time from 'react-time';
+import { Link } from 'react-router';
 //  import styles
 import styles from './home.css';
 
@@ -8,9 +9,9 @@ export class LatestView extends Component {
   setImage() {
     if (this.props.number === 1) {
       return (
-        <a href="#">
+        <Link to={`/post/${this.props.id}`}>
           <img src={this.props.image} alt="empty" />
-        </a>
+        </Link>
       );
     }
     return (<span></span>);
@@ -21,7 +22,7 @@ export class LatestView extends Component {
       <article className={styles.latestItem}>
         <header>
           {this.setImage()}
-          <h1><a href="#">{this.props.title}</a></h1>
+          <h1><Link to={`/post/${this.props.id}`}>{this.props.title}</Link></h1>
         </header>
         <content>
           <div className={styles.date}>
@@ -31,7 +32,7 @@ export class LatestView extends Component {
             {this.props.content}
           </p>
           <div className={styles.readMore}>
-            <a href="#">Read more</a>
+            <Link to={`/post/${this.props.id}`}>Read more</Link>
           </div>
         </content>
       </article>
@@ -41,6 +42,7 @@ export class LatestView extends Component {
 
 LatestView.propTypes = {
   number: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   created_at: PropTypes.number.isRequired,

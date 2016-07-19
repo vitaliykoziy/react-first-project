@@ -1,3 +1,4 @@
+/* eslint no-alert: 0 */
 //  import modules
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';

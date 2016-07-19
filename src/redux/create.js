@@ -14,8 +14,17 @@ import callApi from './middleware/clientMiddleware';
 //  import containers
 import DevTools from '../containers/DevTools';
 //  import reducers
-import { fetchSeoDataReducer } from './reducers/seo';
-import { fetchLatestReducer, fetchFeaturedReducer } from './reducers/home';
+import {
+  fetchSeoDataReducer,
+} from './reducers/seo';
+import {
+  fetchLatestReducer,
+  fetchFeaturedReducer,
+} from './reducers/home';
+import {
+  fetchPostDataReducer,
+  fetchPostCommentsReducer,
+} from './reducers/posts';
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -38,6 +47,10 @@ const rootReducer = combineReducers({
   home: combineReducers({
     latestItems: fetchLatestReducer,
     featuredItems: fetchFeaturedReducer,
+  }),
+  posts: combineReducers({
+    data: fetchPostDataReducer,
+    comments: fetchPostCommentsReducer,
   }),
 });
 

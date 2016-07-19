@@ -7,6 +7,7 @@ import { Footer } from './components/layout/footer';
 import Home from './components/home/home';
 import Login from './components/login/login';
 import SignUp from './components/signUp/signUp';
+import PostView from './components/postView/postView';
 import { NotFound } from './components/notFound/notFound';
 
 const Wrapper = ({ children }) => (
@@ -28,6 +29,7 @@ export const App = () => (
       <IndexRoute component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/sign-up" component={SignUp} />
+      <Route path="/post/:id" component={PostView} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
