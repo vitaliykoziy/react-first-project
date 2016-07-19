@@ -9,15 +9,14 @@ import {
 // Google map InformationWindow
   SHOW_GOOGLE_MARKER_INFO_WINDOW,
   CLOSE_GOOGLE_MARKER_INFO_WINDOW,
+// Like/Dislike comments
+  LIKE_COMMENT,
+  DISLIKE_COMMENT,
 } from '../actions/actionTypes';
 
 const initialStatePost = {
   isFetching: true,
   post: {},
-};
-const initialStatePostComments = {
-  isFetching: true,
-  comments: [],
 };
 
 const setGoogleMapData = (response) => {
@@ -83,6 +82,76 @@ export const fetchPostDataReducer = (state = initialStatePost, action) => {
   }
 };
 
+const initialStatePostComments = {
+  isFetching: true,
+  comments: [],
+};
+const doLike = (state, index) => {
+  const comments = state.comments;
+  const { likeStatus, like, unlike } = comments[index].likes;
+  switch (likeStatus) {
+    case 0:
+      comments[index].likes = {
+        likeStatus: 1,
+        like: like + 1,
+        unlike,
+      };
+      break;
+    case 1:
+      comments[index].likes = {
+        likeStatus: 0,
+        like: like - 1,
+        unlike,
+      };
+      break;
+    case -1:
+      comments[index].likes = {
+        likeStatus: 1,
+        like: like + 1,
+        unlike: unlike - 1,
+      };
+      break;
+    default:
+      return state;
+  }
+  const newState = state;
+  newState.comments = comments;
+  return newState;
+};
+
+const doDislike = (state, index) => {
+  const comments = state.comments;
+  const { likeStatus, like, unlike } = comments[index].likes;
+  switch (likeStatus) {
+    case 0:
+      comments[index].likes = {
+        likeStatus: -1,
+        like,
+        unlike: unlike + 1,
+      };
+      break;
+    case 1:
+      comments[index].likes = {
+        likeStatus: -1,
+        like: like - 1,
+        unlike: unlike + 1,
+      };
+      break;
+    case -1:
+      comments[index].likes = {
+        likeStatus: 0,
+        like,
+        unlike: unlike - 1,
+      };
+      break;
+    default:
+      return state;
+  }
+  const newState = state;
+  newState.comments = comments;
+  return newState;
+};
+
 export const fetchPostCommentsReducer = (state = initialStatePostComments, action) => {
   switch (action.type) {
     case FETCH_POST_COMMENTS_REQUEST:
@@ -100,6 +169,10 @@ export const fetchPostCommentsReducer = (state = initialStatePostComments, actio
         isFetching: false,
         comments: [],
       });
+    case LIKE_COMMENT:
+      return doLike(state, action.index);
+    case DISLIKE_COMMENT:
+      return doDislike(state, action.index);
     default:
       return state;
   }

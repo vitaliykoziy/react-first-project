@@ -11,3 +11,7 @@ export {
   showInfoWindowAction,
   closeInfoWindowAction,
 } from './googleMap';
+export {
+  doLikeAction,
+  doDislikeAction,
+} from './likeDislike';

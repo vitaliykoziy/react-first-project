@@ -15,6 +15,8 @@ import {
   seoActions,
   fetchPostDataAction,
   fetchPostCommentsAction,
+  doLikeAction,
+  doDislikeAction,
 } from '../../redux/actions/index';
 //  import styles
 import styles from './post.css';
@@ -58,7 +60,13 @@ class PostView extends Component {
           <SeparateLine text="Reviews" />
           {
             comments.map((comment, index) => (
-              <Comment {...comment} key={index} />
+              <Comment
+                {...comment}
+                key={index}
+                commentIndex={index}
+                doLike={() => this.props.likeComment(index)}
+                doDislike={() => this.props.dislikeComment(index)}
+              />
             ))
           }
         </div>
@@ -70,6 +78,8 @@ PostView.propTypes = {
   fetchSeoDataAction: PropTypes.func,
   postCommentsAction: PropTypes.func,
   postDataAction: PropTypes.func,
+  likeComment: PropTypes.func,
+  dislikeComment: PropTypes.func,
   seo: PropTypes.object,
   postData: PropTypes.object.isRequired,
   commentsData: PropTypes.object,
@@ -87,5 +97,7 @@ export default connect(
       ...seoActions,
       postDataAction: fetchPostDataAction,
       postCommentsAction: fetchPostCommentsAction,
+      likeComment: doLikeAction,
+      dislikeComment: doDislikeAction,
     }, dispatch)
 )(PostView);

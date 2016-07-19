@@ -3,33 +3,49 @@ import styles from './post.css';
 import 'font-awesome-webpack';
 
 export class Comment extends Component {
-  getLikes({ likeStatus, like, unlike }) {
+  getLikes({ likeStatus, like, unlike }, actions) {
     if (likeStatus === 0) {
       return (
         <div className={styles.likeSection}>
-          <i className="fa fa-thumbs-o-up"><span className={styles.value}>{like}</span></i>
-          <i className="fa fa-thumbs-o-down"><span className={styles.value}>{unlike}</span></i>
+          <i onClick={actions.doLike} className="fa fa-thumbs-o-up">
+            <span className={styles.value}>{like}</span>
+          </i>
+          <i onClick={actions.doDislike} className="fa fa-thumbs-o-down">
+            <span className={styles.value}>{unlike}</span>
+          </i>
         </div>
       );
     }
     if (likeStatus === 1) {
       return (
         <div className={styles.likeSection}>
-          <i className="fa fa-thumbs-up"><span className={styles.value}>{like}</span></i>
-          <i className="fa fa-thumbs-o-down"><span className={styles.value}>{unlike}</span></i>
+          <i onClick={actions.doLike} className="fa fa-thumbs-up">
+            <span className={styles.value}>{like}</span>
+          </i>
+          <i onClick={actions.doDislike} className="fa fa-thumbs-o-down">
+            <span className={styles.value}>{unlike}</span>
+          </i>
         </div>
       );
     }
 
     return (
       <div className={styles.likeSection}>
-        <i className="fa fa-thumbs-o-up"><span className={styles.value}>{like}</span></i>
-        <i className="fa fa-thumbs-down"><span className={styles.value}>{unlike}</span></i>
+        <i onClick={actions.doLike} className="fa fa-thumbs-o-up">
+          <span className={styles.value}>{like}</span>
+        </i>
+        <i onClick={actions.doDislike} className="fa fa-thumbs-down">
+          <span className={styles.value}>{unlike}</span>
+        </i>
       </div>
     );
   }
   render() {
-    const { author, message, likes } = this.props;
+    const { author, message, likes, doLike, doDislike } = this.props;
+    const actions = {
+      doLike: () => doLike(),
+      doDislike: () => doDislike(),
+    };
     return (
       <div className={styles.comment}>
         <div className={styles.commentInfo}>
@@ -39,7 +55,7 @@ export class Comment extends Component {
               {author.first_name} {author.last_name}
             </span>
           </div>
-          {this.getLikes(likes)}
+          {this.getLikes(likes, actions)}
         </div>
         <div className={styles.message}>
           {message}
@@ -54,4 +70,7 @@ Comment.propTypes = {
   author: PropTypes.object.isRequired,
   message: PropTypes.string.isRequired,
   likes: PropTypes.object.isRequired,
+  doLike: PropTypes.func,
+  doDislike: PropTypes.func,
+  commentIndex: PropTypes.number,
 };
