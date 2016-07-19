@@ -40,10 +40,20 @@ const setGoogleMapData = (response) => {
   ));
   newResponse.googleMap = {
     markers,
+    activeWindow: 0,
   };
   return newResponse;
 };
 
+
+const toggleInfoWindow = (state, currentWindowIndex) => {
+  const newState = state;
+  const prevActiveWindow = newState.post.googleMap.activeWindow;
+  newState.post.googleMap.markers[prevActiveWindow].infoWindow.show = false;
+  newState.post.googleMap.markers[currentWindowIndex].infoWindow.show = true;
+  newState.post.googleMap.activeWindow = currentWindowIndex;
+  return newState;
+};
 
 export const fetchPostDataReducer = (state = initialStatePost, action) => {
   const newState = state;
@@ -64,8 +74,7 @@ export const fetchPostDataReducer = (state = initialStatePost, action) => {
         post: {},
       });
     case SHOW_GOOGLE_MARKER_INFO_WINDOW:
-      newState.post.googleMap.markers[action.index].infoWindow.show = true;
-      return Object.assign({}, state, newState);
+      return Object.assign({}, state, toggleInfoWindow(state, action.index));
     case CLOSE_GOOGLE_MARKER_INFO_WINDOW:
       newState.post.googleMap.markers[action.index].infoWindow.show = false;
       return Object.assign({}, state, newState);

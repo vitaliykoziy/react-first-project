@@ -15,38 +15,41 @@ import {
   seoActions,
   fetchPostDataAction,
   fetchPostCommentsAction,
-  setMapMarkersAction,
 } from '../../redux/actions/index';
 //  import styles
 import styles from './post.css';
 
-const fetchSeoData = props => props.fetchSeoDataAction('post');
-const fetchPostData = props => props.fetchPostDataAction(props.routeParams.id);
-const fetchPostComments = props => props.fetchPostCommentsAction(props.routeParams.id);
-
 class PostView extends Component {
   componentWillMount() {
-    fetchSeoData(this.props);
-    fetchPostData(this.props);
-    fetchPostComments(this.props);
+    const {
+      fetchSeoDataAction,
+      postDataAction,
+      postCommentsAction,
+      routeParams,
+    } = this.props;
+    fetchSeoDataAction('post');
+    postDataAction(routeParams.id);
+    postCommentsAction(routeParams.id);
   }
 
   render() {
+    const { post } = this.props.postData;
+    const { comments } = this.props.commentsData;
     return (
       <div className={styles.postContent}>
         <Helmet {...this.props.seo} />
         <article className={styles.post}>
           <header>
             <div className={styles.information}>
-              <Time value={this.props.postData.post.created_at * 1000} format="DD MMM YYYY" />
-              <Rating rating={this.props.postData.post.rating} />
+              <Time value={post.created_at * 1000} format="DD MMM YYYY" />
+              <Rating rating={post.rating} />
             </div>
-            <h1>{this.props.postData.post.title}</h1>
+            <h1>{post.title}</h1>
           </header>
           <content>
             <p>
-              <img className={styles.leftImage} src={this.props.postData.post.image} alt="post" />
-              {this.props.postData.post.content}
+              <img className={styles.leftImage} src={post.image} alt="post" />
+              {post.content}
             </p>
           </content>
           <Map />
@@ -54,7 +57,7 @@ class PostView extends Component {
         <div className={styles.commentsSection}>
           <SeparateLine text="Reviews" />
           {
-            this.props.commentsData.comments.map((comment, index) => (
+            comments.map((comment, index) => (
               <Comment {...comment} key={index} />
             ))
           }
@@ -65,12 +68,12 @@ class PostView extends Component {
 }
 PostView.propTypes = {
   fetchSeoDataAction: PropTypes.func,
-  fetchPostCommentsAction: PropTypes.func,
-  fetchPostDataAction: PropTypes.func,
-  setMapMarkersAction: PropTypes.func,
+  postCommentsAction: PropTypes.func,
+  postDataAction: PropTypes.func,
   seo: PropTypes.object,
   postData: PropTypes.object.isRequired,
   commentsData: PropTypes.object,
+  routeParams: PropTypes.object,
 };
 
 export default connect(
@@ -82,8 +85,7 @@ export default connect(
   dispatch => bindActionCreators(
     {
       ...seoActions,
-      fetchPostDataAction,
-      fetchPostCommentsAction,
-      setMapMarkersAction,
+      postDataAction: fetchPostDataAction,
+      postCommentsAction: fetchPostCommentsAction,
     }, dispatch)
 )(PostView);

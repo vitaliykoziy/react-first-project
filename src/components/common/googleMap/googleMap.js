@@ -9,8 +9,13 @@ import {
   closeInfoWindowAction,
 } from '../../../redux/actions/index';
 class Map extends Component {
-  showInfoWindow(marker, index) {
-    const { show, title, fax, telephone } = marker.infoWindow;
+  renderInfoWindow(marker, index) {
+    const {
+      show,
+      title,
+      fax,
+      telephone,
+    } = marker.infoWindow;
     if (!show) {
       return <span></span>;
     }
@@ -28,37 +33,45 @@ class Map extends Component {
   }
 
   render() {
-    const { isFetching } = this.props.postData;
+    const {
+      isFetching,
+      post,
+    } = this.props.postData;
     if (isFetching) {
       return <noscript />;
     }
-    const props = this.props;
-    const markers = this.props.postData.post.googleMap.markers;
+
+    const {
+      sectionStyle,
+      containerStyle,
+      defaultZoom,
+    } = this.props;
+    const markers = post.googleMap.markers;
     return (
-      <section style={props.sectionStyle}>
+      <section style={sectionStyle}>
         <hr />
         <h2>Find us on the map</h2>
         <GoogleMapLoader
           query={{ libraries: 'geometry,drawing,places,visualization' }}
           containerElement={
             <div
-              {...props}
-              style={props.containerStyle}
+              {...this.props}
+              style={containerStyle}
             />
           }
           googleMapElement={
             <GoogleMap
-              defaultZoom={props.defaultZoom}
+              defaultZoom={defaultZoom}
               defaultCenter={markers[0].position}
             >
               {
                 markers.map((marker, index) => (
                   <Marker
                     {...marker}
-                    onClick={() => props.showInfoWindowAction(index)}
+                    onClick={() => this.props.showInfoWindowAction(index)}
                     key={index}
                   >
-                    {this.showInfoWindow(marker, index)}
+                    {this.renderInfoWindow(marker, index)}
                   </Marker>
                 ))
               }
