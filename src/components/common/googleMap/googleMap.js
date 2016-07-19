@@ -37,9 +37,6 @@ class Map extends Component {
 
   render() {
     const props = this.props;
-    if (props.markers.isFetching) {
-      return <span></span>;
-    }
     return (
       <section style={props.sectionStyle}>
         <GoogleMapLoader
@@ -56,10 +53,11 @@ class Map extends Component {
               defaultCenter={props.defaultCenter}
             >
               {
-                props.markers.data.map((marker, index) => (
+                props.markers.map((marker, index) => (
                   <Marker
                     {...marker}
                     onClick={() => this.handleClickMarker(index)}
+                    key={index}
                   >
                     {this.showInfoWindow(marker, index)}
                   </Marker>
@@ -73,7 +71,7 @@ class Map extends Component {
   }
 }
 Map.propTypes = {
-  markers: PropTypes.object,
+  markers: PropTypes.array,
   defaultCenter: PropTypes.object,
   showInfoWindowAction: PropTypes.func,
   closeInfoWindowAction: PropTypes.func,
@@ -96,7 +94,7 @@ Map.defaultProps = {
 
 export default connect(
   state => ({
-    markers: state.posts.googleMap.markers,
+    kokos: state.posts.data,
   }),
   dispatch => bindActionCreators(
     {

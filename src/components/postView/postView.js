@@ -23,43 +23,25 @@ import styles from './post.css';
 const fetchSeoData = props => props.fetchSeoDataAction('post');
 const fetchPostData = props => props.fetchPostDataAction(props.routeParams.id);
 const fetchPostComments = props => props.fetchPostCommentsAction(props.routeParams.id);
-const setMapData = (props) => {
-  if (!props.postData.isFetching) {
-    const markers = [];
-    props.postData.post.locations.map((location) => (
-      markers.push({
-        position: {
-          lat: location.latitude,
-          lng: location.longitude,
-        },
-        opacity: 1,
-        infoWindow: {
-          show: false,
-          title: location.title,
-          telephone: location.telephone,
-          fax: location.fax,
-        },
-      })
-    ));
-    props.setMapMarkersAction(markers);
-  }
-};
-
 
 class PostView extends Component {
   componentWillMount() {
     fetchSeoData(this.props);
     fetchPostData(this.props);
     fetchPostComments(this.props);
-    setMapData(this.props);
   }
 
   renderMapView() {
-    const { isFetching, data } = this.props.googleMap.markers;
-    if (isFetching) {
+    const { isFetching, post } = this.props.postData;
+    if (isFetching || !post.googleMap) {
       return <span>LOADING ....</span>;
     }
-    return <Map defaultCenter={data[0].position} />;
+    return (
+      <Map
+        markers={post.googleMap.markers}
+        defaultCenter={post.googleMap.markers[0].position}
+      />
+    );
   }
 
   render() {
@@ -104,7 +86,6 @@ PostView.propTypes = {
   seo: PropTypes.object,
   postData: PropTypes.object.isRequired,
   commentsData: PropTypes.object,
-  googleMap: PropTypes.object,
 };
 
 export default connect(
@@ -112,7 +93,6 @@ export default connect(
     seo: state.seo,
     postData: state.posts.data,
     commentsData: state.posts.comments,
-    googleMap: state.posts.googleMap,
   }),
   dispatch => bindActionCreators(
     {

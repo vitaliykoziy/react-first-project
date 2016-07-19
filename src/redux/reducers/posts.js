@@ -6,6 +6,9 @@ import {
   FETCH_POST_COMMENTS_REQUEST,
   FETCH_POST_COMMENTS_SUCCESS,
   FETCH_POST_COMMENTS_FAILURE,
+// Google map InformationWindow
+  SHOW_GOOGLE_MARKER_INFO_WINDOW,
+  CLOSE_GOOGLE_MARKER_INFO_WINDOW,
 } from '../actions/actionTypes';
 
 const initialStatePost = {
@@ -17,23 +20,55 @@ const initialStatePostComments = {
   comments: [],
 };
 
+const setGoogleMapData = (response) => {
+  const newResponse = response;
+  const markers = [];
+  response.locations.map((location) => (
+    markers.push({
+      position: {
+        lat: location.latitude,
+        lng: location.longitude,
+      },
+      opacity: 1,
+      infoWindow: {
+        show: false,
+        title: location.title,
+        telephone: location.telephone,
+        fax: location.fax,
+      },
+    })
+  ));
+  newResponse.googleMap = {
+    markers,
+  };
+  return newResponse;
+};
+
+
 export const fetchPostDataReducer = (state = initialStatePost, action) => {
+  const newState = state;
   switch (action.type) {
     case FETCH_POST_REQUEST:
       return Object.assign({}, state, {
-        isFetching: true,
+        isFetching: 1,
         post: {},
       });
     case FETCH_POST_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        post: action.response,
+        post: setGoogleMapData(action.response),
       });
     case FETCH_POST_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         post: {},
       });
+    case SHOW_GOOGLE_MARKER_INFO_WINDOW:
+      newState.post.googleMap.markers[action.index].infoWindow.show = true;
+      return Object.assign({}, state, newState);
+    case CLOSE_GOOGLE_MARKER_INFO_WINDOW:
+      newState.post.googleMap.markers[action.index].infoWindow.show = false;
+      return Object.assign({}, state, newState);
     default:
       return state;
   }

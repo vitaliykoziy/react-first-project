@@ -25,9 +25,6 @@ import {
   fetchPostDataReducer,
   fetchPostCommentsReducer,
 } from './reducers/posts';
-import {
-  googleMarkersDataReducer,
-} from './reducers/googleMap';
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -54,9 +51,6 @@ const rootReducer = combineReducers({
   posts: combineReducers({
     data: fetchPostDataReducer,
     comments: fetchPostCommentsReducer,
-    googleMap: combineReducers({
-      markers: googleMarkersDataReducer,
-    }),
   }),
 });
 
