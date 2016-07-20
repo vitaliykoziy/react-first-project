@@ -8,7 +8,8 @@
     },
     "message": ".... Nothing interesting",
     "likes":{
-      "likeStatus": -1,
+      "likeStatus": false,
+      "unlikeStatus": true,
       "like": 0,
       "unlike": 1
     }

@@ -13,5 +13,4 @@ export {
 } from './googleMap';
 export {
   doLikeAction,
-  doDislikeAction,
-} from './likeDislike';
+} from './likeComment';

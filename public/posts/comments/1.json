@@ -8,7 +8,8 @@
     },
     "message": "It is very helpful",
     "likes":{
-      "likeStatus": 1,
+      "likeStatus": true,
+      "unlikeStatus": false,
       "like": 5,
       "unlike": 0
     }
@@ -22,7 +23,8 @@
     },
     "message": "It is amazing. Thanks bro :)",
     "likes":{
-      "likeStatus": 0,
+      "likeStatus": false,
+      "unlikeStatus": false,
       "like": 26,
       "unlike": 4
     }

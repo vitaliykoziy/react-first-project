@@ -1,42 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import styles from '../post.css';
 import 'font-awesome-webpack';
+import classNames from 'classnames';
 
 export class CommentView extends Component {
-  getLikes({ likeStatus, like, unlike }, actions) {
-    if (likeStatus === 0) {
-      return (
-        <div className={styles.likeSection}>
-          <i onClick={actions.doLike} className="fa fa-thumbs-o-up">
-            <span className={styles.value}>{like}</span>
-          </i>
-          <i onClick={actions.doDislike} className="fa fa-thumbs-o-down">
-            <span className={styles.value}>{unlike}</span>
-          </i>
-        </div>
-      );
-    }
-    if (likeStatus === 1) {
-      return (
-        <div className={styles.likeSection}>
-          <i onClick={actions.doLike} className="fa fa-thumbs-up">
-            <span className={styles.value}>{like}</span>
-          </i>
-          <i onClick={actions.doDislike} className="fa fa-thumbs-o-down">
-            <span className={styles.value}>{unlike}</span>
-          </i>
-        </div>
-      );
-    }
+  getLikes({ likeStatus, unlikeStatus, like, unlike }, actions) {
+    const up = classNames({
+      fa: true,
+      'fa-thumbs-o-up': !likeStatus,
+      'fa-thumbs-up': likeStatus,
+    });
+    const down = classNames({
+      fa: true,
+      'fa-thumbs-o-down': !unlikeStatus,
+      'fa-thumbs-down': unlikeStatus,
+    });
 
     return (
       <div className={styles.likeSection}>
-        <i onClick={actions.doLike} className="fa fa-thumbs-o-up">
-          <span className={styles.value}>{like}</span>
-        </i>
-        <i onClick={actions.doDislike} className="fa fa-thumbs-down">
-          <span className={styles.value}>{unlike}</span>
-        </i>
+        <a onClick={actions.doLike} >
+          <i className={up}>
+            <span className={styles.value}>{like}</span>
+          </i>
+        </a>
+        <a onClick={actions.doDislike}>
+          <i className={down}>
+            <span className={styles.value}>{unlike}</span>
+          </i>
+        </a>
       </div>
     );
   }

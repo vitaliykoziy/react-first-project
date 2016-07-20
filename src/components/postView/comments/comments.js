@@ -9,8 +9,11 @@ import { CommentView } from './commentView';
 import {
   fetchPostCommentsAction,
   doLikeAction,
-  doDislikeAction,
 } from '../../../redux/actions/index';
+import {
+  LIKE,
+  DISLIKE,
+} from '../../../redux/actions/likeComment';
 //  import styles
 import styles from '../post.css';
 
@@ -41,8 +44,8 @@ class Comments extends Component {
               {...comment}
               key={index}
               commentIndex={index}
-              doLike={() => this.props.likeComment(index)}
-              doDislike={() => this.props.dislikeComment(index)}
+              doLike={() => this.props.likeComment(index, LIKE)}
+              doDislike={() => this.props.likeComment(index, DISLIKE)}
             />
           ))
         }
@@ -53,7 +56,6 @@ class Comments extends Component {
 Comments.propTypes = {
   postCommentsAction: PropTypes.func,
   likeComment: PropTypes.func,
-  dislikeComment: PropTypes.func,
   commentsData: PropTypes.object,
   routeParams: PropTypes.object,
   postId: PropTypes.string.isRequired,
@@ -67,6 +69,5 @@ export default connect(
     {
       postCommentsAction: fetchPostCommentsAction,
       likeComment: doLikeAction,
-      dislikeComment: doDislikeAction,
     }, dispatch)
 )(Comments);
