@@ -14,3 +14,6 @@ export {
 export {
   doLikeAction,
 } from './likeComment';
+export {
+  orderCommentsAction,
+} from './orderComments';

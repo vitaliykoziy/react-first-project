@@ -9,6 +9,7 @@ import { CommentView } from './commentView';
 import {
   fetchPostCommentsAction,
   doLikeAction,
+  orderCommentsAction,
 } from '../../../redux/actions/index';
 import {
   LIKE,
@@ -38,6 +39,17 @@ class Comments extends Component {
     return (
       <div className={styles.commentsSection}>
         <SeparateLine text="Reviews" />
+        <div className={styles.orders}>
+          <div>Order:</div>
+          <select>
+            <option selected="selected">From newest to oldest</option>
+            <option>From oldest to newest</option>
+            <option>Like &uarr;</option>
+            <option>Like &darr;</option>
+            <option>Unlike &uarr;</option>
+            <option>Unlike &darr;</option>
+          </select>
+        </div>
         {
           comments.map((comment, index) => (
             <CommentView
@@ -56,6 +68,7 @@ class Comments extends Component {
 Comments.propTypes = {
   postCommentsAction: PropTypes.func,
   likeComment: PropTypes.func,
+  orderComments: PropTypes.func,
   commentsData: PropTypes.object,
   routeParams: PropTypes.object,
   postId: PropTypes.string.isRequired,
@@ -69,5 +82,6 @@ export default connect(
     {
       postCommentsAction: fetchPostCommentsAction,
       likeComment: doLikeAction,
+      orderComments: orderCommentsAction,
     }, dispatch)
 )(Comments);

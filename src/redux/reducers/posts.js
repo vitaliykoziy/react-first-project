@@ -12,12 +12,23 @@ import {
   CLOSE_GOOGLE_MARKER_INFO_WINDOW,
 // Like/Dislike comments
   LIKE_COMMENT,
+// Order comments
+  ORDER_COMMENTS,
 } from '../actions/actionTypes';
 import {
   LIKE,
   DISLIKE,
 } from '../actions/likeComment';
-
+/*
+import {
+  ORDER_BY_DATE_A_Z,
+  ORDER_BY_DATE_Z_A,
+  ORDER_BY_LIKE_A_Z,
+  ORDER_BY_LIKE_Z_A,
+  ORDER_BY_UNLIKE_A_Z,
+  ORDER_BY_UNLIKE_Z_A,
+} from '../actions/orderComments'
+*/
 const initialStatePost = {
   isFetching: true,
   post: {},
@@ -130,6 +141,8 @@ export const fetchPostCommentsReducer = (state = initialStatePostComments, actio
       comment.like = like;
       comment.unlike = unlike;
       return Object.assign({}, state, comment);
+    case ORDER_COMMENTS:
+      return state;
     default:
       return state;
   }
