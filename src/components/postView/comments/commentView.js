@@ -1,7 +1,9 @@
+/* eslint camelcase: 0 */
 import React, { Component, PropTypes } from 'react';
 import styles from '../post.css';
 import 'font-awesome-webpack';
 import classNames from 'classnames';
+import Time from 'react-time';
 
 export class CommentView extends Component {
   getLikes({ likeStatus, unlikeStatus, like, unlike }, actions) {
@@ -32,7 +34,7 @@ export class CommentView extends Component {
     );
   }
   render() {
-    const { author, message, likes, doLike, doDislike } = this.props;
+    const { author, message, likes, doLike, doDislike, created_at } = this.props;
     const actions = {
       doLike: () => doLike(),
       doDislike: () => doDislike(),
@@ -45,6 +47,11 @@ export class CommentView extends Component {
             <span>
               {author.first_name} {author.last_name}
             </span>
+            <div className={styles.reviewDate}>
+              <span>/</span>
+              <Time value={created_at * 1000} format="DD MMM YYYY HH:MM" />
+              <span>/</span>
+            </div>
           </div>
           {this.getLikes(likes, actions)}
         </div>
@@ -64,4 +71,5 @@ CommentView.propTypes = {
   doLike: PropTypes.func,
   doDislike: PropTypes.func,
   commentIndex: PropTypes.number,
+  created_at: PropTypes.number,
 };
