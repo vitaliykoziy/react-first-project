@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import styles from './post.css';
+import styles from '../post.css';
 import 'font-awesome-webpack';
 
-export class Comment extends Component {
+export class CommentView extends Component {
   getLikes({ likeStatus, like, unlike }, actions) {
     if (likeStatus === 0) {
       return (
@@ -66,7 +66,7 @@ export class Comment extends Component {
   }
 }
 
-Comment.propTypes = {
+CommentView.propTypes = {
   author: PropTypes.object.isRequired,
   message: PropTypes.string.isRequired,
   likes: PropTypes.object.isRequired,
