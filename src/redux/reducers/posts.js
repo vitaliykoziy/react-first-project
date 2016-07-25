@@ -14,6 +14,10 @@ import {
   LIKE_COMMENT,
 // Order comments
   ORDER_COMMENTS,
+// Posts comments pagination
+  FETCH_PAGINATIOM_POST_COMMENTS_REQUEST,
+  FETCH_PAGINATIOM_POST_COMMENTS_SUCCESS,
+  FETCH_PAGINATIOM_POST_COMMENTS_FAILURE,
 } from '../actions/actionTypes';
 import {
   LIKE,
@@ -99,6 +103,9 @@ export const fetchPostDataReducer = (state = initialStatePost, action) => {
 
 const initialStatePostComments = {
   isFetching: true,
+  perPage: 3,
+  currentPage: 1,
+  totalCount: 0,
   comments: [],
 };
 
@@ -112,7 +119,8 @@ export const fetchPostCommentsReducer = (state = initialStatePostComments, actio
     case FETCH_POST_COMMENTS_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        comments: action.response,
+        totalCount: action.response.totalCount,
+        comments: action.response.comments,
       });
     case FETCH_POST_COMMENTS_FAILURE:
       return Object.assign({}, state, {
@@ -170,13 +178,26 @@ export const fetchPostCommentsReducer = (state = initialStatePostComments, actio
         default:
           break;
       }
-      return Object.assign(
-        {},
-        state,
-        {
-          comments: sortByProperties(state.comments, orderKey, true, reverse),
-        }
-      );
+      return Object.assign({}, state, {
+        comments: sortByProperties(state.comments, orderKey, true, reverse),
+      });
+    case FETCH_PAGINATIOM_POST_COMMENTS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+        comments: [],
+      });
+    case FETCH_PAGINATIOM_POST_COMMENTS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        currentPage: action.page,
+        totalCount: action.response.totalCount,
+        comments: action.response.comments,
+      });
+    case FETCH_PAGINATIOM_POST_COMMENTS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        comments: [],
+      });
     default:
       return state;
   }

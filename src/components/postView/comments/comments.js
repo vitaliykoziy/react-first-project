@@ -5,11 +5,13 @@ import { bindActionCreators } from 'redux';
 // import components
 import { SeparateLine } from '../../common/separateLine';
 import { CommentView } from './commentView';
+import { Pagination } from '../../common/pagination/pagination';
 //  import actions
 import {
   fetchPostCommentsAction,
   doLikeAction,
   orderCommentsAction,
+  doCommentsPaginationAction,
 } from '../../../redux/actions/index';
 import {
   LIKE,
@@ -38,7 +40,13 @@ class Comments extends Component {
     this.props.orderComments(event.target.value);
   }
   render() {
-    const { isFetching, comments } = this.props.commentsData;
+    const {
+      isFetching,
+      comments,
+      totalCount,
+      currentPage,
+      perPage,
+    } = this.props.commentsData;
     if (isFetching) {
       return (
         <div className={styles.commentsSection}>
@@ -72,6 +80,13 @@ class Comments extends Component {
             />
           ))
         }
+        <Pagination
+          totlaCount={totalCount}
+          currentPage={currentPage}
+          perPage={perPage}
+          ID={this.props.postId}
+          paginate={this.props.paginateComments}
+        />
       </div>
     );
   }
@@ -80,6 +95,7 @@ Comments.propTypes = {
   postCommentsAction: PropTypes.func,
   likeComment: PropTypes.func,
   orderComments: PropTypes.func,
+  paginateComments: PropTypes.func,
   commentsData: PropTypes.object,
   routeParams: PropTypes.object,
   postId: PropTypes.string.isRequired,
@@ -94,5 +110,6 @@ export default connect(
       postCommentsAction: fetchPostCommentsAction,
       likeComment: doLikeAction,
       orderComments: orderCommentsAction,
+      paginateComments: doCommentsPaginationAction,
     }, dispatch)
 )(Comments);
