@@ -1,3 +1,4 @@
+/* eslint no-case-declarations: 0 */
 import {
   FETCH_POST_REQUEST,
   FETCH_POST_SUCCESS,
@@ -9,15 +10,28 @@ import {
 // Google map InformationWindow
   SHOW_GOOGLE_MARKER_INFO_WINDOW,
   CLOSE_GOOGLE_MARKER_INFO_WINDOW,
+// Like/Dislike comments
+  LIKE_COMMENT,
+// Order comments
+  ORDER_COMMENTS,
 } from '../actions/actionTypes';
-
+import {
+  LIKE,
+  DISLIKE,
+} from '../actions/likeComment';
+import {
+  ORDER_BY_DATE_A_Z,
+  ORDER_BY_DATE_Z_A,
+  ORDER_BY_LIKE_A_Z,
+  ORDER_BY_LIKE_Z_A,
+  ORDER_BY_UNLIKE_A_Z,
+  ORDER_BY_UNLIKE_Z_A,
+} from '../actions/orderComments';
+// import utils
+import { sortByProperties } from '../../utils/sortByProperties';
 const initialStatePost = {
   isFetching: true,
   post: {},
-};
-const initialStatePostComments = {
-  isFetching: true,
-  comments: [],
 };
 
 const setGoogleMapData = (response) => {
@@ -83,6 +97,11 @@ export const fetchPostDataReducer = (state = initialStatePost, action) => {
   }
 };
 
+const initialStatePostComments = {
+  isFetching: true,
+  comments: [],
+};
+
 export const fetchPostCommentsReducer = (state = initialStatePostComments, action) => {
   switch (action.type) {
     case FETCH_POST_COMMENTS_REQUEST:
@@ -100,6 +119,64 @@ export const fetchPostCommentsReducer = (state = initialStatePostComments, actio
         isFetching: false,
         comments: [],
       });
+    case LIKE_COMMENT:
+      const comment = state.comments[action.index].likes;
+      let { like, unlike } = comment;
+      const prevLikeStatus = comment.likeStatus;
+      const prevUnlikeStatus = comment.unlikeStatus;
+      comment.likeStatus = action.likeType === LIKE && !prevLikeStatus;
+      comment.unlikeStatus = action.likeType === DISLIKE && !prevUnlikeStatus;
+      if (action.likeType === LIKE) {
+        if ((!prevLikeStatus && !prevUnlikeStatus) || prevUnlikeStatus) {
+          like++;
+        }
+      }
+      if (action.likeType === DISLIKE) {
+        if ((!prevLikeStatus && !prevUnlikeStatus) || prevLikeStatus) {
+          unlike++;
+        }
+      }
+      unlike = prevUnlikeStatus ? unlike - 1 : unlike;
+      like = prevLikeStatus ? like - 1 : like;
+      comment.like = like;
+      comment.unlike = unlike;
+      return Object.assign({}, state, comment);
+    case ORDER_COMMENTS:
+      let reverse;
+      let orderKey;
+      switch (action.orderType) {
+        case ORDER_BY_DATE_Z_A:
+        case ORDER_BY_LIKE_Z_A:
+        case ORDER_BY_UNLIKE_Z_A:
+          reverse = true;
+          break;
+        default:
+          reverse = false;
+          break;
+      }
+      switch (action.orderType) {
+        case ORDER_BY_DATE_A_Z:
+        case ORDER_BY_DATE_Z_A:
+          orderKey = 'created_at';
+          break;
+        case ORDER_BY_LIKE_A_Z:
+        case ORDER_BY_LIKE_Z_A:
+          orderKey = 'likes.like';
+          break;
+        case ORDER_BY_UNLIKE_A_Z:
+        case ORDER_BY_UNLIKE_Z_A:
+          orderKey = 'likes.unlike';
+          break;
+        default:
+          break;
+      }
+      return Object.assign(
+        {},
+        state,
+        {
+          comments: sortByProperties(state.comments, orderKey, true, reverse),
+        }
+      );
     default:
       return state;
   }

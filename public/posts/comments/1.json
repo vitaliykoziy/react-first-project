@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "author": {
       "logo": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ8alxQ_W-zZ5eB2BgvJtAMSTNrh-I9fH6SPO4wWhns43bDcX5V",
       "first_name": "Mickey",
@@ -7,12 +8,15 @@
     },
     "message": "It is very helpful",
     "likes":{
-      "likeStatus": 1,
+      "likeStatus": true,
+      "unlikeStatus": false,
       "like": 5,
       "unlike": 0
-    }
+    },
+    "created_at": 1467617784
   },
   {
+    "id":2,
     "author": {
       "logo": "https://blog.eu.playstation.com/files/avatars/avatar_184295.jpg",
       "first_name": "James",
@@ -20,9 +24,11 @@
     },
     "message": "It is amazing. Thanks bro :)",
     "likes":{
-      "likeStatus": 0,
+      "likeStatus": false,
+      "unlikeStatus": false,
       "like": 26,
       "unlike": 4
-    }
+    },
+    "created_at": 1467624984
   }
 ]
