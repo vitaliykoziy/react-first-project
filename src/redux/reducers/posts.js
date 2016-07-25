@@ -19,7 +19,6 @@ import {
   LIKE,
   DISLIKE,
 } from '../actions/likeComment';
-/*
 import {
   ORDER_BY_DATE_A_Z,
   ORDER_BY_DATE_Z_A,
@@ -27,8 +26,9 @@ import {
   ORDER_BY_LIKE_Z_A,
   ORDER_BY_UNLIKE_A_Z,
   ORDER_BY_UNLIKE_Z_A,
-} from '../actions/orderComments'
-*/
+} from '../actions/orderComments';
+// import utils
+import { sortByProperties } from '../../utils/sortByProperties';
 const initialStatePost = {
   isFetching: true,
   post: {},
@@ -142,7 +142,41 @@ export const fetchPostCommentsReducer = (state = initialStatePostComments, actio
       comment.unlike = unlike;
       return Object.assign({}, state, comment);
     case ORDER_COMMENTS:
-      return state;
+      let reverse;
+      let orderKey;
+      switch (action.orderType) {
+        case ORDER_BY_DATE_Z_A:
+        case ORDER_BY_LIKE_Z_A:
+        case ORDER_BY_UNLIKE_Z_A:
+          reverse = true;
+          break;
+        default:
+          reverse = false;
+          break;
+      }
+      switch (action.orderType) {
+        case ORDER_BY_DATE_A_Z:
+        case ORDER_BY_DATE_Z_A:
+          orderKey = 'created_at';
+          break;
+        case ORDER_BY_LIKE_A_Z:
+        case ORDER_BY_LIKE_Z_A:
+          orderKey = 'likes.like';
+          break;
+        case ORDER_BY_UNLIKE_A_Z:
+        case ORDER_BY_UNLIKE_Z_A:
+          orderKey = 'likes.unlike';
+          break;
+        default:
+          break;
+      }
+      return Object.assign(
+        {},
+        state,
+        {
+          comments: sortByProperties(state.comments, orderKey, true, reverse),
+        }
+      );
     default:
       return state;
   }

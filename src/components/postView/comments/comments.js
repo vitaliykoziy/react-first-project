@@ -15,6 +15,14 @@ import {
   LIKE,
   DISLIKE,
 } from '../../../redux/actions/likeComment';
+import {
+  ORDER_BY_DATE_A_Z,
+  ORDER_BY_DATE_Z_A,
+  ORDER_BY_LIKE_A_Z,
+  ORDER_BY_LIKE_Z_A,
+  ORDER_BY_UNLIKE_A_Z,
+  ORDER_BY_UNLIKE_Z_A,
+} from '../../../redux/actions/orderComments';
 //  import styles
 import styles from '../post.css';
 
@@ -25,6 +33,9 @@ class Comments extends Component {
       postId,
     } = this.props;
     postCommentsAction(postId);
+  }
+  sortComments(event) {
+    this.props.orderComments(event.target.value);
   }
   render() {
     const { isFetching, comments } = this.props.commentsData;
@@ -41,13 +52,13 @@ class Comments extends Component {
         <SeparateLine text="Reviews" />
         <div className={styles.orders}>
           <div>Order:</div>
-          <select>
-            <option selected="selected">From newest to oldest</option>
-            <option>From oldest to newest</option>
-            <option>Like &uarr;</option>
-            <option>Like &darr;</option>
-            <option>Unlike &uarr;</option>
-            <option>Unlike &darr;</option>
+          <select onChange={::this.sortComments} defaultValue={ORDER_BY_DATE_A_Z}>
+            <option value={ORDER_BY_DATE_A_Z}>From newest to oldest</option>
+            <option value={ORDER_BY_DATE_Z_A}>From oldest to newest</option>
+            <option value={ORDER_BY_LIKE_A_Z}>Like &uarr;</option>
+            <option value={ORDER_BY_LIKE_Z_A}>Like &darr;</option>
+            <option value={ORDER_BY_UNLIKE_A_Z}>Unlike &uarr;</option>
+            <option value={ORDER_BY_UNLIKE_Z_A}>Unlike &darr;</option>
           </select>
         </div>
         {
