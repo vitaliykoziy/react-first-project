@@ -1,0 +1,21 @@
+{
+  "totalCount": 28,
+  "comments": [
+    {
+      "id": 31,
+      "author": {
+        "logo": "https://static-resource.np.community.playstation.net/avatar_m/3RD/UT00161111NG3_2FDE195AA90920BFD7BD_M.png",
+        "first_name": "10 Katha",
+        "last_name": "10 Lop"
+      },
+      "message": "Wow.... good job",
+      "likes": {
+        "likeStatus": false,
+        "unlikeStatus": true,
+        "like": 97,
+        "unlike": 3
+      },
+      "created_at": 1467707784
+    }
+  ]
+}

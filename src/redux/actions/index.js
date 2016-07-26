@@ -6,6 +6,7 @@ export {
 export {
   fetchPostDataAction,
   fetchPostCommentsAction,
+  doCommentsPaginationAction,
 } from './posts';
 export {
   showInfoWindowAction,
