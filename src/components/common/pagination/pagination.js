@@ -7,40 +7,32 @@ const setItems = ({ totlaCount, currentPage, perPage, paginate, ID }) => {
   let dotsReturned = false;
   return [...Array(pagesCount).keys()].map((value, index) => {
     pageNumber = index + 1;
-    if (pageNumber === 1 || pageNumber === pagesCount) {
-      // show first and last page
-      return (
-        <li
-          className={currentPage === pageNumber ? styles.active : ''}
-          key={index}
-        >
-          <a onClick={() => paginate(ID, index + 1)}>{pageNumber}</a>
-        </li>
-      );
+    switch (pageNumber) {
+      case 1:
+      case currentPage - 1:
+      case currentPage:
+      case currentPage + 1:
+      case pagesCount:
+        dotsReturned = false;
+        return (
+          <li
+            className={currentPage === pageNumber ? styles.active : ''}
+            key={index}
+          >
+            <a onClick={() => paginate(ID, index + 1)}>{pageNumber}</a>
+          </li>
+        );
+      default:
+        if (!dotsReturned) {
+          dotsReturned = true;
+          return (
+            <li key={index}>
+              <span>...</span>
+            </li>
+          );
+        }
+        return false;
     }
-    if (pageNumber - 1 === currentPage
-      || pageNumber + 1 === currentPage
-      || pageNumber === currentPage) {
-      // show current page with prev and next pages
-      dotsReturned = false;
-      return (
-        <li
-          className={currentPage === pageNumber ? styles.active : ''}
-          key={index}
-        >
-          <a onClick={() => paginate(ID, index + 1)}>{pageNumber}</a>
-        </li>
-      );
-    }
-    if (!dotsReturned) {
-      dotsReturned = true;
-      return (
-        <li key={index}>
-          <span>...</span>
-        </li>
-      );
-    }
-    return false;
   });
 };
 
