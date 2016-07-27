@@ -53,7 +53,7 @@ export class CommentView extends Component {
               <span>/</span>
             </div>
           </div>
-          {this.getLikes(likes, actions)}
+            {this.getLikes(likes, actions)}
         </div>
         <div className={styles.message}>
           {message}

@@ -3,7 +3,7 @@ import styles from '../../../static/css/_app.css';
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <div className={styles.footerContent}>
+    <div className={styles.content}>
       <p>
         &copy; 2016 All right reserved
       </p>

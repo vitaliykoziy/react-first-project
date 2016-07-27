@@ -3,6 +3,7 @@ var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var postcss = require('postcss');
+var lost = require('lost');
 require('es6-promise').polyfill();
 var port = '8080';
 
@@ -53,7 +54,10 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss']
+        loaders: [
+          'style',
+          'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss',
+        ]
       },
       {
         test: /\.(png|jpg)$/,
@@ -79,7 +83,11 @@ module.exports = {
   ],
   postcss: function () {
     return {
-      plugins: [autoprefixer, precss],
+      plugins: [
+        autoprefixer,
+        precss,
+        lost,
+      ],
     };
   },
 

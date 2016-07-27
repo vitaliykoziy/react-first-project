@@ -6,7 +6,7 @@ import { Image } from '../../utils/image';
 import styles from './home.css';
 
 export const FullWidthAdvertising = () => (
-  <aside className={styles.fullWidthAds}>
+  <aside className={`${styles.fullWidthAds} ${styles.content}`}>
     <Image src="ads.jpg" alt="advertising" />
   </aside>
 );

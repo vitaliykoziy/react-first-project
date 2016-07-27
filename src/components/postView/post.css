@@ -2,12 +2,11 @@
 :local {
     .postContent{
         margin-top: 100px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-wrap: wrap;
+        /*display: flex;*/
+        /*flex-direction: column;*/
+        /*align-items: center;*/
+        /*flex-wrap: wrap;*/
         article.post{
-            @mixin contentPostion;
             .leftImage{
                 float: left;
                 margin: 0 10px 10px 0px;
@@ -16,25 +15,12 @@
         img{
             max-width: 500px;
         }
-        .information{
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: space-between;
-        }
         time{
             color: $red;
         }
         .commentsSection{
-            @mixin contentPostion;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            margin-top: 50px;
+            margin-top: 100px;
             .comment{
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
                 .author{
                     margin-bottom: 10px;
                     display: flex;
@@ -43,7 +29,7 @@
                     img {
                         width: 50px;
                         border-radius: 50px;
-                    margin-right: 10px;
+                        margin-right: 10px;
                     }
                 }
                 .commentInfo{

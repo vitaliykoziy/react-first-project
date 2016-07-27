@@ -1,0 +1,42 @@
+:local {
+    .content {
+        lost-center: 1024px;
+    }
+    .row {
+        lost-utility: clearfix;
+        @mixin contentPostion;
+        .col_10 {
+            lost-column: 10/10;
+        }
+        .col_9 {
+            lost-column: 9/10;
+        }
+        .col_8 {
+            lost-column: 8/10;
+        }
+        .col_7 {
+            lost-column: 7/10;
+        }
+        .col_6 {
+            lost-column: 6/10;
+        }
+        .col_5 {
+            lost-column: 5/10;
+        }
+        .col_4 {
+            lost-column: 4/10;
+        }
+        .col_3 {
+            lost-column: 3/10;
+        }
+        .col_2 {
+            lost-column: 2/10;
+        }
+        .col_1 {
+            lost-column: 1/10;
+        }
+        .col_4_in_row{
+            lost-column: 1/4;
+        }
+    }
+}
