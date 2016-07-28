@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './home.css';
 
 export const MayLikeItemView = () => (
-  <article className={styles.item}>
+  <article className={`${styles.item} ${styles.col_4_in_row}`}>
     <header>
       <a href="#">
         <img src="http://www.mybusiness.com.au/images/technology/debbie-mayo-smith.jpg" alt="empty" />

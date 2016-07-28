@@ -31,13 +31,15 @@ class PostView extends Component {
   render() {
     const { post } = this.props.postData;
     return (
-      <div className={styles.postContent}>
+      <div className={`${styles.postContent} ${styles.content}`}>
         <Helmet {...this.props.seo} />
         <article className={styles.post}>
           <header>
-            <div className={styles.information}>
-              <Time value={post.created_at * 1000} format="DD MMM YYYY" />
-              <Rating rating={post.rating} />
+            <div className={styles.row}>
+              <Time className={styles.col_5} value={post.created_at * 1000} format="DD MMM YYYY" />
+              <div className={`${styles.col_5} ${styles.textRight}`}>
+                <Rating rating={post.rating} />
+              </div>
             </div>
             <h1>{post.title}</h1>
           </header>

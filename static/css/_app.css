@@ -1,12 +1,6 @@
+@import "mixins";
 @import "colors";
-
-@define-mixin contentPostion {
-    max-width: 1024px;
-    width: 100%;
-}
-@define-mixin pageBackground {
-    background: $white;
-}
+@import "grid";
 
 :root{
     body{
@@ -21,6 +15,7 @@
         }
     }
     ul{
+        margin: 0px;
         li{
             display: inline-block;
         }
@@ -29,44 +24,30 @@
 
 :local {
     .headerContent {
-        display: flex;
         position: fixed;
         z-index: 10;
         top: 0;
         width: 100%;
         background-color: $black;
         font-size: 24px;
-        justify-content: center;
+        line-height:90px;
         &, a{
             color: $white;
         }
-    }
-    .navigationContent {
-        @mixin contentPostion;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         ul {
+            text-align: right;
             li{
-
                 margin-left: 30px;
             }
         }
     }
     .footer{
-        min-height: 150px;
+        line-height: 150px;
         margin-top: 20px;
         background-color: $black;
         color: $white;
-        display: flex;
-        justify-content: center;
         font-size: 16px;
-    }
-    .footerContent{
-        @mixin contentPostion;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
     }
     .separateLine{
         @mixin contentPostion;
@@ -89,6 +70,9 @@
     }
     .fs22{
         font-size: 22px;
+    }
+    .textRight{
+        text-align: right;
     }
     .hasError{
         margin: 0;
